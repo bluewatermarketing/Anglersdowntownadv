@@ -27,9 +27,7 @@ export const SOCIAL = {
   tiktok: "https://www.tiktok.com/@oc.downtown.adventures",
 };
 
-/* Stylized SVG fallback is active while the real PNG is dropped in.
-   When public/angler-logo.png is saved, switch LOGO_URL to "/angler-logo.png". */
-export const LOGO_URL = "/angler-logo.svg";
+export const LOGO_URL = "/angler-logo.png";
 
 export const IMAGES = {
   heroJetski:

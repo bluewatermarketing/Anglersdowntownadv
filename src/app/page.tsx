@@ -19,9 +19,9 @@ import { WeatherBar } from "@/components/WeatherBar";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { TerminalKicker } from "@/components/primitives/TerminalKicker";
 import { StatusPill } from "@/components/primitives/StatusPill";
-import { MetricCard } from "@/components/primitives/MetricCard";
 import { AnimatedCounter } from "@/components/primitives/AnimatedCounter";
 import { GradientMesh } from "@/components/primitives/GradientMesh";
+import { StatStrip } from "@/components/primitives/StatStrip";
 
 /* ── Gallery image lists ── */
 const GALLERY_ROW_1 = [
@@ -208,12 +208,6 @@ export default function Home() {
                 guides, full safety briefing, and a route that puts you within eyeshot
                 of wild horses and dolphins in their habitat.
               </p>
-              <div className="grid grid-cols-2 gap-3 mb-8">
-                <MetricCard value="$129" label="PER JET SKI / HR" />
-                <MetricCard value="60 MIN" label="GUIDED RUN" />
-                <MetricCard value="UP TO 3" label="RIDERS / SKI" />
-                <MetricCard value="AGES 5+" label="ALL WELCOME" />
-              </div>
               <div className="flex flex-wrap gap-3">
                 <a
                   href={BOOKING_URL}
@@ -260,6 +254,18 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          JET SKI STATS
+      ═══════════════════════════════════════════════════════ */}
+      <StatStrip
+        stats={[
+          { value: "60 MIN", label: "Ride Time" },
+          { value: "$129", label: "Starting Rate" },
+          { value: "UP TO 3", label: "Riders / Ski" },
+          { value: "AGES 5+", label: "Welcome" },
+        ]}
+      />
 
       {/* ═══════════════════════════════════════════════════════
           FULL-BLEED PHOTO DIVIDER
@@ -331,12 +337,6 @@ export default function Home() {
                 shores, anchor on sandbars, catch sunset on the water. 2 to 8 hours —
                 your schedule, your crew.
               </p>
-              <div className="grid grid-cols-2 gap-3 mb-8">
-                <MetricCard value="$329" label="STARTING RATE" />
-                <MetricCard value="2-8 HR" label="YOU CHOOSE" />
-                <MetricCard value="UP TO 10" label="GUESTS" />
-                <MetricCard value="SELF" label="CAPTAINED" />
-              </div>
               <div className="flex flex-wrap gap-3">
                 <a
                   href={BOOKING_URL}
@@ -357,6 +357,18 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          PONTOON STATS
+      ═══════════════════════════════════════════════════════ */}
+      <StatStrip
+        stats={[
+          { value: "$329", label: "Starting Rate" },
+          { value: "2–8 HR", label: "Choose Duration" },
+          { value: "UP TO 10", label: "Guests / Boat" },
+          { value: "SELF", label: "Captained" },
+        ]}
+      />
 
       {/* ═══════════════════════════════════════════════════════
           STATS BANNER

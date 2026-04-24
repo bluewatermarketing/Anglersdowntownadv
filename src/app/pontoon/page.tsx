@@ -1,14 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
-import { BOOKING_URL, IMAGES, PHONE, PHONE_HREF, REVIEWS, HERO_VIDEO_URL, HERO_FALLBACK_IMAGE } from "@/lib/constants";
+import {
+  BOOKING_URL,
+  IMAGES,
+  PHONE,
+  PHONE_HREF,
+  REVIEWS,
+  HERO_VIDEO_URL,
+  HERO_FALLBACK_IMAGE,
+  ADDRESS,
+  ADDRESS_URL,
+  SITE_URL,
+} from "@/lib/constants";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { faqSchema, serviceSchema, breadcrumbSchema } from "@/components/StructuredData";
+import { TerminalKicker } from "@/components/primitives/TerminalKicker";
+import { StatusPill } from "@/components/primitives/StatusPill";
+import { StatStrip } from "@/components/primitives/StatStrip";
+import { GradientMesh } from "@/components/primitives/GradientMesh";
 
 export const metadata: Metadata = {
   title: "Pontoon Boat Rental Ocean City MD | Bay Cruises from $329 | Book Online",
   description:
-    "Rent a pontoon boat in Ocean City, Maryland — self-guided 2-8 hour cruises on Assateague Bay. See wild horses, anchor at sandbars, bring your own food & drinks. Up to 10 guests, no experience needed. Brand-new boats, free parking downtown. Book online today!",
+    "Rent a pontoon boat in Ocean City, Maryland — self-captained 2-8 hour cruises on Assateague Bay. See wild horses, anchor at sandbars, bring your own food and drinks. Up to 10 guests. Brand-new boats, free parking downtown. Book online.",
   keywords: [
     "pontoon boat rental ocean city md",
     "boat rental ocean city maryland",
@@ -26,30 +41,55 @@ export const metadata: Metadata = {
     "sunset cruise ocean city md",
     "fishing boat rental ocean city",
   ],
-  alternates: {
-    canonical: "https://anglerwatersports.com/pontoon",
-  },
+  alternates: { canonical: `${SITE_URL}/pontoon` },
   openGraph: {
     title: "Pontoon Boat Rental in Ocean City, MD | From $329",
-    description: "Self-guided pontoon cruises on Assateague Bay. See wild horses, swim at sandbars, bring your crew. Up to 10 guests. Book online!",
-    url: "https://anglerwatersports.com/pontoon",
+    description:
+      "Self-captained pontoon cruises on Assateague Bay. Wild horses, sandbars, sunsets. Up to 10 guests. Book online.",
+    url: `${SITE_URL}/pontoon`,
     type: "website",
     images: ["/og-logo.png"],
   },
 };
 
-const HIGHLIGHTS = [
-  { value: "From $329", sub: "Starting Price", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-  { value: "2–8 Hours", sub: "Flexible Duration", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
-  { value: "Up to 10", sub: "Guests Per Boat", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" },
-  { value: "Self-Guided", sub: "You're the Captain", icon: "M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" },
+const SIGHTS = [
+  {
+    code: "01",
+    title: "Wild Horses",
+    desc: "Anchor near Assateague Island and watch the famous wild horses graze feet from the water.",
+    image: IMAGES.scenery4,
+    alt: "Wild horses on Assateague Island viewed from a pontoon boat rental Ocean City MD",
+  },
+  {
+    code: "02",
+    title: "Hidden Sandbars",
+    desc: "Drop anchor at secluded sandbars for swimming, wading, and sunbathing.",
+    image: IMAGES.scenery1,
+    alt: "Pontoon boat anchored at a sandbar on Assateague Bay Ocean City Maryland",
+  },
+  {
+    code: "03",
+    title: "Dolphins & Birds",
+    desc: "Bottlenose dolphins, ospreys, and blue herons are bay regulars. Keep your camera ready.",
+    image: IMAGES.scenery3,
+    alt: "Bottlenose dolphins in Assateague Bay near Angler Watersports pontoon route",
+  },
+  {
+    code: "04",
+    title: "Golden Hour",
+    desc: "Book a late departure and catch the sunset cruise photo that shore can't give you.",
+    image: IMAGES.scenery2,
+    alt: "Sunset cruise on a pontoon boat rental Assateague Bay Ocean City MD",
+  },
 ];
 
-const SIGHTS = [
-  { title: "Wild Horses", desc: "Anchor your pontoon boat near Assateague Island and watch the famous wild horses graze feet from the water.", image: IMAGES.scenery4 },
-  { title: "Hidden Sandbars", desc: "Drop anchor at secluded sandbars for swimming, wading, and sunbathing during your boat rental.", image: IMAGES.scenery1 },
-  { title: "Dolphins & Wildlife", desc: "Bottlenose dolphins, ospreys, and blue herons are regulars on the bay — keep your camera ready.", image: IMAGES.scenery3 },
-  { title: "Sunset Cruises", desc: "Book a late departure for a sunset pontoon cruise and watch the sky light up over Assateague Bay.", image: IMAGES.scenery2 },
+const ITINERARY = [
+  { time: "0:00", step: "Depart the dock", desc: "Quick orientation, safety gear, then south through the bay." },
+  { time: "0:30", step: "Waterfront cruise", desc: "Waterfront homes, local marinas, open bay ahead." },
+  { time: "1:00", step: "Anchor at Assateague", desc: "Watch wild horses along the shoreline up close." },
+  { time: "2:00", step: "Swim + sandbars", desc: "Jump in, wade, or just soak up the sun on a bar." },
+  { time: "3:00", step: "Scenic return", desc: "Head back as the afternoon light hits the water." },
+  { time: "4:00", step: "Back at dock", desc: "Arrive at Dorchester Street with a full memory card." },
 ];
 
 const PRICING = [
@@ -62,189 +102,253 @@ const PRICING = [
 ];
 
 const FEATURES = [
-  { label: "Canopy & Shade", desc: "Stay cool with built-in boat canopy" },
-  { label: "Bluetooth Ready", desc: "Bring a speaker — play your music" },
-  { label: "BYOB Friendly", desc: "Bring your own cooler, food & drinks" },
-  { label: "Life Vests Included", desc: "All sizes provided for every guest" },
-  { label: "Free Parking", desc: "Right at our downtown dock location" },
-  { label: "No Experience Needed", desc: "Full orientation before departure" },
+  { label: "Canopy Shade", desc: "Built-in canopy stays cool all day", code: "SHADE" },
+  { label: "Bluetooth Ready", desc: "Bring a speaker, play your music", code: "AUDIO" },
+  { label: "BYOB Friendly", desc: "Bring a cooler, food, and drinks", code: "BYOB" },
+  { label: "Life Vests", desc: "All sizes provided for every guest", code: "GEAR" },
+  { label: "Free Parking", desc: "Right at the downtown dock", code: "PARK" },
+  { label: "No Experience", desc: "Full orientation before departure", code: "LEVEL" },
 ];
 
 const OCCASIONS = [
-  { icon: "M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0A1.75 1.75 0 013 15.546V12a9 9 0 0118 0v3.546z", title: "Birthday Parties", desc: "Celebrate on the water with up to 10 guests" },
-  { icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z", title: "Bachelor/ette Parties", desc: "The ultimate pre-wedding water adventure" },
-  { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z", title: "Family Reunions", desc: "Quality time on the bay with the whole crew" },
-  { icon: "M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z", title: "Sunset Photo Cruises", desc: "Golden hour views you can't get from shore" },
+  { title: "Birthday Parties", desc: "Celebrate with up to 10 guests", image: IMAGES.group4 },
+  { title: "Bachelor / Bachelorette", desc: "Pre-wedding adventure on the bay", image: IMAGES.group3 },
+  { title: "Family Reunions", desc: "Quality time on the water with the crew", image: IMAGES.group2 },
+  { title: "Sunset Cruises", desc: "Golden-hour views you can't get from shore", image: IMAGES.scenery2 },
+];
+
+const BRING = [
+  "Sunscreen & sunglasses",
+  "Cooler with drinks & snacks",
+  "Towel and swimwear",
+  "Bluetooth speaker",
+  "Fishing gear (optional)",
+  "Camera for the horses",
+];
+
+const REQUIREMENTS = [
+  "Driver: 21+ with valid license",
+  "All ages welcome as guests",
+  "Bay access only (no ocean)",
+  "Driver must stay sober",
+  "Arrive 15 min before departure",
 ];
 
 const faqs = [
   { q: "How old do you have to be to drive?", a: "The driver must be at least 21 years old with a valid driver's license. No prior boating experience is needed — we'll give you a full orientation before you depart." },
-  { q: "How many people can fit?", a: "Up to 10 people per pontoon boat. All ages are welcome, including kids!" },
-  { q: "Is it self-guided?", a: "Yes! Unlike our jet skis, pontoon boats are self-guided excursions. You're the captain — go where you want within the bay area." },
+  { q: "How many people can fit?", a: "Up to 10 people per pontoon boat. All ages are welcome, including kids." },
+  { q: "Is it self-guided?", a: "Yes. Unlike our jet skis, pontoon boats are self-guided. You're the captain — go where you want within the bay area." },
   { q: "Can we bring alcohol?", a: "Yes, alcohol is permitted on pontoon boats. However, the driver must remain completely sober — no drinking and driving on the water." },
   { q: "Are life vests required?", a: "Life vests are available but not required for adults. Children must wear life vests and stay with adults at all times." },
-  { q: "Where can we go?", a: "You can explore all of Assateague Bay — cruise past wild horses on Assateague Island, anchor at sandbars, or just relax on the open water. Bay only — ocean access is not permitted for safety." },
+  { q: "Where can we go?", a: "You can explore all of Assateague Bay — cruise past wild horses on Assateague Island, anchor at sandbars, or relax on the open water. Bay only — ocean access is not permitted for safety." },
   { q: "What if the weather is bad?", a: "If we cancel due to weather, you'll receive a full refund or the option to reschedule. Safety always comes first." },
-  { q: "Can we fish from the pontoon?", a: "Absolutely! You're welcome to bring fishing gear and drop a line. Maryland fishing regulations apply — make sure you have a valid fishing license." },
+  { q: "Can we fish from the pontoon?", a: "Absolutely. You're welcome to bring fishing gear and drop a line. Maryland fishing regulations apply — make sure you have a valid fishing license." },
 ];
 
-const photos = [
-  IMAGES.pontoon1, IMAGES.pontoon2, IMAGES.pontoon3,
-  IMAGES.pontoon4, IMAGES.pontoon5, IMAGES.pontoon6,
-  IMAGES.scenery1, IMAGES.scenery2,
-];
-
-/* Gallery photos with SEO-rich alt text */
-const GALLERY_ALTS = [
-  "Pontoon boat rental cruising Assateague Bay in Ocean City MD",
-  "Group of friends on a pontoon boat rental in Ocean City Maryland",
-  "Pontoon boat anchored near Assateague Island wild horses Ocean City",
-  "Family pontoon boat cruise at sunset on Assateague Bay",
-  "Self-guided pontoon boat adventure on the bay Ocean City MD",
-  "Pontoon boat rental with canopy on Assateague Bay Maryland",
-  "Scenic view of Assateague Bay from a pontoon boat rental",
-  "Sunset pontoon cruise on the bay in Ocean City Maryland",
+const GALLERY = [
+  { src: IMAGES.pontoon1, alt: "Pontoon boat rental cruising Assateague Bay in Ocean City MD" },
+  { src: IMAGES.pontoon2, alt: "Group of friends on a pontoon boat rental in Ocean City Maryland" },
+  { src: IMAGES.pontoon3, alt: "Pontoon boat anchored near Assateague Island wild horses Ocean City" },
+  { src: IMAGES.pontoon4, alt: "Family pontoon boat cruise at sunset on Assateague Bay" },
+  { src: IMAGES.pontoon5, alt: "Self-captained pontoon boat adventure on the bay Ocean City MD" },
+  { src: IMAGES.pontoon6, alt: "Pontoon boat rental with canopy on Assateague Bay Maryland" },
+  { src: IMAGES.scenery1, alt: "Scenic view of Assateague Bay from a pontoon boat rental" },
+  { src: IMAGES.scenery2, alt: "Sunset pontoon cruise on the bay in Ocean City Maryland" },
 ];
 
 export default function PontoonPage() {
   return (
     <>
-      {/* Schema.org structured data for SEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema({
-            name: "Pontoon Boat Rental Ocean City MD",
-            description: "Self-guided pontoon boat rental on Assateague Bay in Ocean City, Maryland. 2-8 hour cruises for up to 10 guests. See wild horses on Assateague Island, anchor at sandbars, BYOB friendly. Brand new boats, free parking downtown.",
-            url: "https://anglerwatersports.com/pontoon",
-            price: "329",
-            image: IMAGES.pontoon1,
-          })),
+          __html: JSON.stringify(
+            serviceSchema({
+              name: "Pontoon Boat Rental Ocean City MD",
+              description:
+                "Self-captained pontoon boat rental on Assateague Bay in Ocean City, Maryland. 2-8 hour cruises for up to 10 guests. See wild horses on Assateague Island, anchor at sandbars, BYOB friendly. Brand-new boats, free parking downtown.",
+              url: `${SITE_URL}/pontoon`,
+              price: "329",
+              image: IMAGES.pontoon1,
+            })
+          ),
         }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema(faqs)),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema([
-            { name: "Home", url: "https://anglerwatersports.com" },
-            { name: "Pontoon Boat Rentals", url: "https://anglerwatersports.com/pontoon" },
-          ])),
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "Pontoon Boat Rentals", url: `${SITE_URL}/pontoon` },
+            ])
+          ),
         }}
       />
 
-      {/* ── VIDEO HERO ── */}
-      <section className="relative h-[70vh] min-h-[480px] max-h-[700px] flex items-end justify-center overflow-hidden">
-        <video autoPlay muted loop playsInline poster={HERO_FALLBACK_IMAGE} className="absolute inset-0 w-full h-full object-cover">
+      {/* ═══════════════════════════════════════════════════════
+          HERO
+      ═══════════════════════════════════════════════════════ */}
+      <section className="relative h-[85vh] min-h-[560px] max-h-[820px] flex items-center justify-center overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={HERO_FALLBACK_IMAGE}
+          className="absolute inset-0 w-full h-full object-cover"
+        >
           <source src={HERO_VIDEO_URL} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/25" />
-        <div className="relative z-10 text-center text-white px-4 pb-12 md:pb-16 w-full max-w-4xl mx-auto">
-          <span className="inline-block px-4 py-1.5 bg-yellow-brand text-dark text-xs font-bold uppercase tracking-widest rounded-full mb-4">Pontoon Boat Rentals</span>
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-3 drop-shadow-lg tracking-tight">
-            Your Day on the Bay, Your Way
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-deep/70 via-bg/55 to-bg" />
+        <GradientMesh variant="hero" grid />
+
+        <div className="relative z-10 text-center text-ink px-4 max-w-4xl mx-auto py-16">
+          <div className="flex justify-center mb-5">
+            <StatusPill tone="success" label="Now Booking 2026 Season" />
+          </div>
+
+          <TerminalKicker prefix="RENTALS" label="PONTOON // SELF_CAPTAINED" className="mb-4 justify-center" />
+
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 tracking-tight">
+            Your bay.<br />
+            <span className="text-accent-hi">Your rules.</span>
           </h1>
-          <p className="text-lg md:text-xl text-white/90 mb-6 max-w-2xl mx-auto">
-            Self-guided pontoon cruises for up to 10 guests. Wild horses, sandbars, sunsets — all on your schedule.
+
+          <p className="text-base md:text-lg text-ink-dim mb-8 max-w-2xl mx-auto leading-relaxed">
+            Captain your own pontoon across Assateague Bay. Wild horses, sandbars,
+            sunsets. 2 to 8 hours, up to 10 guests, on your schedule.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="px-8 py-3.5 bg-yellow-brand text-dark font-bold text-base rounded-lg hover:bg-yellow-hover transition-all shadow-xl hover:scale-105">
-              Book Now — From $329
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-accent text-bg font-bold text-base rounded-md hover:bg-accent-hi transition-all shadow-[0_0_40px_rgba(212,160,23,0.25)] hover:scale-[1.02]"
+            >
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] opacity-70 mr-2">[1]</span>
+              Book a Pontoon — From $329
             </a>
-            <a href={PHONE_HREF} className="px-6 py-3.5 bg-white/15 backdrop-blur-sm text-white font-bold text-base rounded-lg border-2 border-white/30 hover:bg-white/25 transition-all">
+            <a
+              href={PHONE_HREF}
+              className="px-6 py-4 bg-surface/60 backdrop-blur-sm text-ink font-mono text-sm uppercase tracking-[0.14em] rounded-md border border-border hover:border-accent/50 hover:bg-surface transition-all"
+            >
               Call {PHONE}
             </a>
           </div>
         </div>
-      </section>
 
-      {/* ── STAT PILLS ── */}
-      <section className="bg-white py-8 md:py-10 border-b border-gray-border">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {HIGHLIGHTS.map((h) => (
-              <div key={h.value} className="flex items-center gap-3 bg-gray-light rounded-xl p-4">
-                <div className="w-11 h-11 bg-blue-brand/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-blue-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d={h.icon} />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-lg font-extrabold text-dark leading-tight">{h.value}</p>
-                  <p className="text-xs text-gray-text">{h.sub}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+          <span className="font-mono text-[9px] uppercase tracking-[0.24em] text-ink-mute">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-accent to-transparent" />
         </div>
       </section>
 
-      {/* ── THE EXPERIENCE ── */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4">
+      {/* ═══════════════════════════════════════════════════════
+          STAT STRIP
+      ═══════════════════════════════════════════════════════ */}
+      <StatStrip
+        stats={[
+          { value: "$329", label: "Starting Rate" },
+          { value: "2–8 HR", label: "Choose Duration" },
+          { value: "UP TO 10", label: "Guests / Boat" },
+          { value: "SELF", label: "Captained" },
+        ]}
+      />
+
+      {/* ═══════════════════════════════════════════════════════
+          THE EXPERIENCE
+      ═══════════════════════════════════════════════════════ */}
+      <section className="relative py-24 md:py-28 overflow-hidden">
+        <GradientMesh variant="subtle" grid={false} />
+        <div className="relative max-w-6xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <ScrollReveal direction="left">
-              <span className="inline-block px-3 py-1 bg-blue-light text-blue-brand text-xs font-bold uppercase tracking-widest rounded-full mb-4">The Experience</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-dark mb-5 tracking-tight">
-                Be Your Own Captain
+              <TerminalKicker prefix="EXPERIENCE" label="THE_DAY" className="mb-5" />
+              <h2 className="text-4xl md:text-5xl font-bold text-ink mb-6 leading-[1.05] tracking-tight">
+                You&apos;re the<br />
+                <span className="text-accent-hi">captain.</span>
               </h2>
-              <div className="text-gray-text text-base leading-relaxed space-y-4">
+              <div className="text-ink-dim text-base md:text-lg leading-relaxed space-y-4 max-w-lg">
                 <p>
-                  Imagine cruising through the calm waters of Assateague Bay with your closest friends and family, the sun on your face, and nothing but open water ahead. Our pontoon boats give you the freedom to explore Ocean City from a completely different perspective.
+                  Cruise the calm waters of Assateague Bay with your crew. Anchor
+                  along Assateague Island and watch wild horses graze feet from the
+                  water. Pull up to a sandbar and swim. Drop a fishing line. Play your
+                  music. Pour a drink. It&apos;s your day.
                 </p>
                 <p>
-                  Anchor along the shores of <strong>Assateague Island</strong> and watch the famous wild horses graze just feet from the water. Pull up to a sandbar and swim. Drop a fishing line over the side. Or simply cruise the bay with music playing and drinks in hand — it&apos;s your adventure, your way.
-                </p>
-                <p>
-                  With up to 10 people on board, pontoon rentals are perfect for family reunions, birthday celebrations, bachelor/bachelorette parties, or just a relaxing day on the water.
+                  Up to 10 people on board. No boating experience required. Full
+                  orientation before you leave the dock. 2 to 8 hours, you pick.
                 </p>
               </div>
             </ScrollReveal>
+
             <ScrollReveal direction="right">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                <Image src={IMAGES.pontoon1} alt="Pontoon boat rental cruising through Assateague Bay in Ocean City Maryland" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-border">
+                <Image
+                  src={IMAGES.pontoon1}
+                  alt="Group on a self-captained pontoon boat rental cruising Assateague Bay Ocean City MD"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/50 via-transparent to-transparent" />
+                <div className="absolute top-4 left-4 px-2.5 py-1 bg-bg/80 backdrop-blur-md border border-accent/40 rounded font-mono text-[10px] uppercase tracking-[0.16em] text-accent-hi">
+                  PRIVATE · SELF-CAPTAINED
+                </div>
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between px-3 py-2 bg-bg/80 backdrop-blur-md border border-border rounded">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">
+                    UP TO 10 GUESTS
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent">
+                    BYOB
+                  </span>
+                </div>
               </div>
             </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* ── SUGGESTED ITINERARY ── */}
-      <section className="py-16 md:py-20 bg-gray-light">
+      {/* ═══════════════════════════════════════════════════════
+          ITINERARY
+      ═══════════════════════════════════════════════════════ */}
+      <section className="py-24 md:py-28 bg-bg-deep border-y border-border">
         <div className="max-w-4xl mx-auto px-4">
-          <ScrollReveal className="text-center mb-10">
-            <span className="inline-block px-3 py-1 bg-blue-brand/10 text-blue-brand text-xs font-bold uppercase tracking-widest rounded-full mb-3">Sample Route</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">Suggested 4-Hour Itinerary</h2>
-            <p className="text-gray-text text-base mt-2">Every trip is different — this is just one way to enjoy the bay.</p>
+          <ScrollReveal className="text-center mb-14 max-w-2xl mx-auto">
+            <TerminalKicker prefix="SAMPLE" label="4HR_ROUTE" className="mb-5 justify-center" />
+            <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
+              A Sample 4-Hour Run
+            </h2>
+            <p className="text-ink-dim text-base md:text-lg mt-4">
+              Every trip is different. Here&apos;s one way to fill the afternoon.
+            </p>
           </ScrollReveal>
+
           <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-blue-brand/20 hidden md:block" />
-            <div className="space-y-6">
-              {[
-                { time: "0:00", step: "Depart from 307 Dorchester St", desc: "Quick orientation, then cruise south through the bay." },
-                { time: "0:30", step: "Cruise past waterfront landmarks", desc: "Stunning homes, local marinas, and open bay waters." },
-                { time: "1:00", step: "Anchor near Assateague Island", desc: "Watch wild horses roaming the shoreline up close." },
-                { time: "2:00", step: "Swim, relax, or explore sandbars", desc: "Jump in the water, wade on sandbars, or just soak up the sun." },
-                { time: "3:00", step: "Cruise back through the bay", desc: "Take the scenic route back as the afternoon light hits the water." },
-                { time: "4:00", step: "Return to the dock", desc: "Arrive back at Dorchester Street with memories that last forever." },
-              ].map((item, i) => (
-                <ScrollReveal key={i} delay={i * 80}>
+            <div className="absolute left-[22px] md:left-[32px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/60 via-accent/20 to-transparent" />
+            <div className="space-y-4">
+              {ITINERARY.map((item, i) => (
+                <ScrollReveal key={item.time} delay={i * 60}>
                   <div className="flex items-start gap-4 md:gap-6">
-                    <div className="relative z-10 w-10 h-10 bg-blue-brand text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 shadow-md">
-                      {i + 1}
+                    <div className="relative z-10 flex-shrink-0 w-11 h-11 md:w-16 md:h-16 rounded-full bg-bg border border-accent/60 flex items-center justify-center">
+                      <span className="mono-num text-[11px] md:text-sm font-bold text-accent-hi">
+                        {item.time}
+                      </span>
                     </div>
-                    <div className="bg-white rounded-xl p-5 border border-gray-border shadow-sm flex-1">
-                      <div className="flex items-center gap-3 mb-1">
-                        <span className="text-xs font-bold text-blue-brand bg-blue-light px-2 py-0.5 rounded">{item.time}</span>
-                        <h3 className="font-bold text-dark">{item.step}</h3>
+                    <div className="flex-1 bg-surface/40 border border-border rounded-lg p-5 hover:border-accent/40 transition-colors">
+                      <div className="flex items-baseline gap-3 mb-1">
+                        <span className="mono-num text-[10px] uppercase tracking-[0.18em] text-accent">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <h3 className="text-ink font-bold text-lg">{item.step}</h3>
                       </div>
-                      <p className="text-gray-text text-sm">{item.desc}</p>
+                      <p className="text-ink-dim text-sm leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 </ScrollReveal>
@@ -254,22 +358,40 @@ export default function PontoonPage() {
         </div>
       </section>
 
-      {/* ── WHAT YOU'LL SEE ── */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4">
-          <ScrollReveal className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">What You&apos;ll See</h2>
-            <p className="text-gray-text text-lg mt-2">The bay is full of surprises — here&apos;s what to expect.</p>
+      {/* ═══════════════════════════════════════════════════════
+          WHAT YOU'LL SEE
+      ═══════════════════════════════════════════════════════ */}
+      <section className="relative py-24 md:py-28 overflow-hidden">
+        <GradientMesh variant="subtle" grid={false} />
+        <div className="relative max-w-7xl mx-auto px-4">
+          <ScrollReveal className="text-center mb-12 max-w-2xl mx-auto">
+            <TerminalKicker prefix="ROUTE" label="SIGHTS" className="mb-5 justify-center" />
+            <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
+              What You&apos;ll See
+            </h2>
+            <p className="text-ink-dim text-lg mt-4">
+              The bay is full of surprises. Here&apos;s what to expect.
+            </p>
           </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {SIGHTS.map((s, i) => (
-              <ScrollReveal key={s.title} delay={i * 100}>
-                <div className="group relative h-72 rounded-2xl overflow-hidden shadow-lg">
-                  <Image src={s.image} alt={s.title} fill sizes="(max-width: 640px) 100vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+              <ScrollReveal key={s.title} delay={i * 80}>
+                <div className="group relative h-80 rounded-xl overflow-hidden border border-border">
+                  <Image
+                    src={s.image}
+                    alt={s.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 25vw"
+                    className="object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-bg-deep/50 to-transparent" />
+                  <div className="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+                    {s.code} · {s.title.toUpperCase()}
+                  </div>
                   <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 className="text-lg font-extrabold text-white mb-1 drop-shadow-md">{s.title}</h3>
-                    <p className="text-white/90 text-xs leading-relaxed drop-shadow-sm">{s.desc}</p>
+                    <h3 className="text-xl font-bold text-ink mb-2 tracking-tight">{s.title}</h3>
+                    <p className="text-ink-dim text-sm leading-relaxed">{s.desc}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -278,144 +400,252 @@ export default function PontoonPage() {
         </div>
       </section>
 
-      {/* ── PERFECT FOR ── */}
-      <section className="py-16 md:py-20 bg-blue-light">
-        <div className="max-w-5xl mx-auto px-4">
-          <ScrollReveal className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">Perfect For Any Occasion</h2>
-            <p className="text-gray-text text-base mt-2">Our pontoon boats are the go-to for groups celebrating on the water.</p>
+      {/* ═══════════════════════════════════════════════════════
+          OCCASIONS
+      ═══════════════════════════════════════════════════════ */}
+      <section className="py-20 md:py-24 bg-bg-deep border-y border-border">
+        <div className="max-w-6xl mx-auto px-4">
+          <ScrollReveal className="text-center mb-12 max-w-2xl mx-auto">
+            <TerminalKicker prefix="OCCASIONS" label="PICK_ONE" className="mb-5 justify-center" />
+            <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
+              Built for Groups
+            </h2>
+            <p className="text-ink-dim text-lg mt-4">
+              Pontoon rentals are the go-to for crews celebrating on the water.
+            </p>
           </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {OCCASIONS.map((o, i) => (
-              <ScrollReveal key={o.title} delay={i * 80}>
-                <div className="bg-white rounded-2xl p-6 border border-gray-border shadow-sm text-center h-full">
-                  <div className="w-12 h-12 bg-blue-brand/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-blue-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d={o.icon} />
-                    </svg>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {OCCASIONS.map((occ, i) => (
+              <ScrollReveal key={occ.title} delay={i * 80}>
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                >
+                  <div className="relative h-64 rounded-xl overflow-hidden border border-border group-hover:border-accent/50 transition-colors">
+                    <Image
+                      src={occ.image}
+                      alt={occ.title}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-bg-deep/50 to-transparent" />
+                    <div className="absolute top-3 left-3 font-mono text-[9px] uppercase tracking-[0.18em] text-accent">
+                      0{i + 1}
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="text-ink font-bold text-base leading-tight tracking-tight">
+                        {occ.title}
+                      </h3>
+                      <p className="text-ink-dim text-xs mt-1">{occ.desc}</p>
+                    </div>
                   </div>
-                  <h3 className="font-bold text-dark mb-1">{o.title}</h3>
-                  <p className="text-gray-text text-sm">{o.desc}</p>
-                </div>
+                </a>
               </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── PRICING & FEATURES ── */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="grid lg:grid-cols-5 gap-10">
-            {/* Pricing card */}
-            <ScrollReveal className="lg:col-span-2">
-              <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-border sticky top-24">
-                <span className="inline-block px-3 py-1 bg-yellow-brand/20 text-dark text-xs font-bold uppercase rounded-full mb-4">Pontoon Rental</span>
-                <h3 className="text-xl font-extrabold text-dark mb-4">Choose Your Duration</h3>
-                <div className="space-y-2 mb-6">
-                  {PRICING.map((p) => (
-                    <div key={p.hours} className={`flex items-center justify-between p-3 rounded-lg border ${p.popular ? "border-blue-brand bg-blue-light" : "border-gray-border"}`}>
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-dark text-sm">{p.hours}</span>
-                        {p.popular && <span className="text-[10px] font-bold uppercase bg-blue-brand text-white px-1.5 py-0.5 rounded">Popular</span>}
-                      </div>
-                      <span className="text-lg font-extrabold text-blue-brand">{p.price}</span>
+      {/* ═══════════════════════════════════════════════════════
+          PRICING + WHAT'S INCLUDED
+      ═══════════════════════════════════════════════════════ */}
+      <section className="relative py-24 md:py-28 overflow-hidden">
+        <GradientMesh variant="subtle" grid={false} />
+        <div className="relative max-w-6xl mx-auto px-4">
+          <ScrollReveal className="text-center mb-14 max-w-2xl mx-auto">
+            <TerminalKicker prefix="PRICING" label="DURATIONS" className="mb-5 justify-center" />
+            <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
+              Pick Your Duration
+            </h2>
+            <p className="text-ink-dim text-lg mt-4">
+              From a 2-hour cruise to a full-day run. Up to 10 guests on every boat.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid lg:grid-cols-5 gap-6">
+            {/* Pricing table */}
+            <ScrollReveal className="lg:col-span-3">
+              <div className="rounded-xl overflow-hidden border border-border">
+                {PRICING.map((p, i) => (
+                  <div
+                    key={p.hours}
+                    className={`flex items-center justify-between px-6 py-5 ${
+                      p.popular ? "bg-accent/10 border-l-2 border-l-accent" : "bg-surface/40"
+                    } ${i < PRICING.length - 1 ? "border-b border-border" : ""}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="mono-num text-[11px] uppercase tracking-[0.16em] text-accent">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-ink font-semibold text-lg">{p.hours}</span>
+                      {p.popular && (
+                        <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-accent-hi border border-accent/40 bg-accent/10 px-2 py-0.5 rounded">
+                          Most Popular
+                        </span>
+                      )}
                     </div>
-                  ))}
-                </div>
-                <p className="text-xs text-gray-text mb-5 text-center">+ tax · Up to 10 guests per boat</p>
-                <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="block w-full py-3.5 bg-yellow-brand text-dark font-bold rounded-lg hover:bg-yellow-hover transition-colors shadow-md mb-3 text-center">
-                  Book Now
+                    <span
+                      className={`mono-num text-2xl font-bold ${
+                        p.popular ? "text-accent-hi" : "text-ink"
+                      }`}
+                    >
+                      {p.price}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-mute">
+                + tax · Up to 10 guests per boat · BYOB permitted
+              </p>
+            </ScrollReveal>
+
+            {/* Book card */}
+            <ScrollReveal className="lg:col-span-2" delay={120}>
+              <div className="bg-surface/60 border border-accent/40 rounded-xl p-6 backdrop-blur-sm sticky top-24">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent mb-3">
+                  &gt; Ready to book
+                </p>
+                <p className="mono-num text-4xl md:text-5xl font-bold text-accent-hi leading-none mb-1">
+                  $329
+                </p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-dim mb-6">
+                  Starting rate · 2 hours · up to 10 guests
+                </p>
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full py-3.5 bg-accent text-bg text-center font-bold rounded-md hover:bg-accent-hi transition-colors shadow-[0_0_24px_rgba(212,160,23,0.2)]"
+                >
+                  Book Online
                 </a>
-                <a href={PHONE_HREF} className="block w-full py-3 border-2 border-blue-brand text-blue-brand font-semibold rounded-lg hover:bg-blue-brand hover:text-white transition-colors text-center">
-                  Call to Book
+                <a
+                  href={PHONE_HREF}
+                  className="block w-full mt-2 py-3 border border-border text-ink text-center font-mono text-sm uppercase tracking-[0.14em] rounded-md hover:border-accent/50 hover:bg-surface transition-colors"
+                >
+                  Call {PHONE}
                 </a>
               </div>
             </ScrollReveal>
+          </div>
 
-            {/* Features grid */}
-            <div className="lg:col-span-3">
-              <ScrollReveal>
-                <h2 className="text-3xl font-extrabold text-dark mb-6 tracking-tight">What&apos;s Included</h2>
-              </ScrollReveal>
-              <div className="grid sm:grid-cols-2 gap-4 mb-10">
-                {FEATURES.map((f, i) => (
-                  <ScrollReveal key={f.label} delay={i * 80}>
-                    <div className="bg-gray-light rounded-xl p-5 border border-gray-border">
-                      <h3 className="font-bold text-dark mb-1">{f.label}</h3>
-                      <p className="text-gray-text text-sm">{f.desc}</p>
-                    </div>
-                  </ScrollReveal>
-                ))}
+          {/* Features */}
+          <div className="mt-16">
+            <ScrollReveal className="mb-8">
+              <div className="flex items-center gap-3">
+                <TerminalKicker prefix="STANDARD" label="INCLUDED" />
+                <div className="flex-1 h-px bg-border" />
               </div>
-
-              <ScrollReveal>
-                <h3 className="text-xl font-bold text-dark mb-4">Good to Know</h3>
-              </ScrollReveal>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <ScrollReveal delay={50}>
-                  <div>
-                    <h4 className="font-bold text-dark text-sm mb-2 flex items-center gap-1.5">
-                      <svg className="w-4 h-4 text-yellow-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
-                      What to Bring
-                    </h4>
-                    <ul className="space-y-1.5 text-gray-text text-sm">
-                      {["Sunscreen & sunglasses", "Cooler with drinks & snacks", "Towel and swimwear", "Bluetooth speaker", "Fishing gear (optional)", "Camera for the horses!"].map((item) => (
-                        <li key={item} className="flex items-center gap-2">
-                          <span className="w-1 h-1 bg-yellow-brand rounded-full flex-shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+            </ScrollReveal>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {FEATURES.map((f, i) => (
+                <ScrollReveal key={f.label} delay={i * 50}>
+                  <div className="group bg-surface/40 border border-border rounded-lg p-5 hover:border-accent/40 hover:bg-surface transition-colors h-full">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent mb-3">
+                      &gt; {f.code}
+                    </p>
+                    <h3 className="text-ink font-bold text-lg mb-1 tracking-tight">{f.label}</h3>
+                    <p className="text-ink-dim text-sm leading-relaxed">{f.desc}</p>
                   </div>
                 </ScrollReveal>
-                <ScrollReveal delay={100}>
-                  <div>
-                    <h4 className="font-bold text-dark text-sm mb-2 flex items-center gap-1.5">
-                      <svg className="w-4 h-4 text-blue-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                      Requirements
-                    </h4>
-                    <ul className="space-y-1.5 text-gray-text text-sm">
-                      {["Driver: 21+ with valid license", "All ages welcome as guests", "Bay access only — no ocean", "Driver must stay sober", "Arrive 15 min before departure"].map((item) => (
-                        <li key={item} className="flex items-center gap-2">
-                          <span className="w-1 h-1 bg-blue-brand rounded-full flex-shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </ScrollReveal>
-              </div>
+              ))}
             </div>
+          </div>
+
+          {/* Bring + Requirements */}
+          <div className="mt-10 grid md:grid-cols-2 gap-4">
+            <ScrollReveal>
+              <div className="bg-surface/40 border border-border rounded-xl p-6 h-full">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent mb-4">
+                  &gt; BRING
+                </p>
+                <ul className="space-y-2.5">
+                  {BRING.map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-ink">
+                      <span className="mono-num text-accent-hi text-sm">◦</span>
+                      <span className="text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={80}>
+              <div className="bg-surface/40 border border-border rounded-xl p-6 h-full">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent mb-4">
+                  &gt; REQUIREMENTS
+                </p>
+                <ul className="space-y-2.5">
+                  {REQUIREMENTS.map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-ink">
+                      <span className="mono-num text-accent-hi text-sm">◦</span>
+                      <span className="text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* ── REVIEWS ── */}
-      <section className="py-16 md:py-20 bg-gray-light">
+      {/* ═══════════════════════════════════════════════════════
+          REVIEWS
+      ═══════════════════════════════════════════════════════ */}
+      <section className="py-20 md:py-24 bg-bg-deep border-y border-border">
         <div className="max-w-6xl mx-auto px-4">
-          <ScrollReveal className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm border border-gray-border mb-4">
-              <div className="flex gap-0.5">
-                {[1,2,3,4,5].map((s) => (
-                  <svg key={s} className="w-4 h-4 text-yellow-brand" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+          <ScrollReveal className="text-center mb-12 max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-md bg-surface border border-border mb-6">
+              <div className="flex items-center gap-0.5">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <svg key={s} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
                 ))}
               </div>
-              <span className="font-bold text-dark text-sm">5.0 on Google</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
+                <span className="mono-num text-ink text-sm">5.0</span> · Google Reviews
+              </span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">What Guests Say</h2>
+            <TerminalKicker prefix="GUESTS" label="VERIFIED" className="mb-5" />
+            <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
+              What Guests Say
+            </h2>
           </ScrollReveal>
-          <div className="grid md:grid-cols-3 gap-5">
+
+          <div className="grid md:grid-cols-3 gap-4">
             {REVIEWS.slice(3, 6).map((r, i) => (
               <ScrollReveal key={i} delay={i * 100}>
-                <div className="bg-white p-6 rounded-2xl border border-gray-border shadow-sm h-full">
-                  <div className="flex gap-0.5 mb-3">
-                    {Array.from({ length: r.rating }).map((_, s) => (
-                      <svg key={s} className="w-4 h-4 text-yellow-brand" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                    ))}
+                <div className="bg-surface/40 border border-border rounded-xl p-6 hover:border-accent/40 hover:bg-surface transition-all h-full">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-0.5">
+                      {Array.from({ length: r.rating }).map((_, s) => (
+                        <svg key={s} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-mute">
+                      {r.source}
+                    </span>
                   </div>
-                  <p className="text-gray-text text-sm leading-relaxed mb-4">&ldquo;{r.text}&rdquo;</p>
-                  <p className="font-bold text-dark text-sm">{r.name} <span className="font-normal text-gray-text">· {r.source}</span></p>
+                  <p className="text-ink-dim leading-relaxed text-sm mb-6">
+                    &ldquo;{r.text}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-3 pt-4 border-t border-border">
+                    <div className="w-9 h-9 rounded-md bg-accent/10 border border-accent/40 text-accent-hi flex items-center justify-center text-sm font-bold">
+                      {r.name[0]}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-ink text-sm">{r.name}</p>
+                      <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-mute">
+                        Verified Guest
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </ScrollReveal>
             ))}
@@ -423,72 +653,164 @@ export default function PontoonPage() {
         </div>
       </section>
 
-      {/* ── FAQ ── */}
-      <section className="py-16 md:py-20">
-        <div className="max-w-4xl mx-auto px-4">
-          <ScrollReveal>
-            <h2 className="text-3xl font-extrabold text-dark mb-8 tracking-tight">Frequently Asked Questions</h2>
+      {/* ═══════════════════════════════════════════════════════
+          FAQ
+      ═══════════════════════════════════════════════════════ */}
+      <section className="relative py-24 md:py-28 overflow-hidden">
+        <GradientMesh variant="subtle" grid={false} />
+        <div className="relative max-w-3xl mx-auto px-4">
+          <ScrollReveal className="text-center mb-12">
+            <TerminalKicker prefix="FAQ" label="QUESTIONS" className="mb-5 justify-center" />
+            <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
+              Frequently Asked
+            </h2>
           </ScrollReveal>
-          <div className="space-y-3">
+          <div className="space-y-2">
             {faqs.map((faq, i) => (
-              <details key={i} className="bg-gray-light rounded-xl border border-gray-border group">
-                <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-dark hover:text-blue-brand transition-colors">
-                  {faq.q}
-                  <svg className="w-5 h-5 text-gray-text group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                </summary>
-                <div className="px-5 pb-5 text-gray-text leading-relaxed">{faq.a}</div>
-              </details>
+              <ScrollReveal key={i} delay={i * 40}>
+                <details className="group bg-surface/40 border border-border rounded-lg hover:border-accent/40 transition-colors">
+                  <summary className="flex items-center justify-between gap-4 p-5 cursor-pointer font-semibold text-ink">
+                    <span className="flex items-center gap-3">
+                      <span className="mono-num text-[11px] uppercase tracking-[0.16em] text-accent">
+                        Q{String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span>{faq.q}</span>
+                    </span>
+                    <svg
+                      className="w-4 h-4 text-accent group-open:rotate-180 transition-transform flex-shrink-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-5 pb-5 pt-0 text-ink-dim text-sm leading-relaxed border-t border-border">
+                    <p className="pt-4">{faq.a}</p>
+                  </div>
+                </details>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── GALLERY ── */}
-      <section className="py-16 bg-gray-light">
-        <div className="max-w-6xl mx-auto px-4">
+      {/* ═══════════════════════════════════════════════════════
+          GALLERY
+      ═══════════════════════════════════════════════════════ */}
+      <section className="py-20 bg-bg-deep border-y border-border">
+        <div className="max-w-7xl mx-auto px-4">
           <ScrollReveal className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold text-dark tracking-tight">Pontoon Gallery</h2>
+            <TerminalKicker prefix="FEED" label="PHOTOS" className="mb-5 justify-center" />
+            <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
+              Pontoon Gallery
+            </h2>
           </ScrollReveal>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {photos.map((src, i) => (
-              <div key={i} className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-md group">
-                <Image src={src} alt={GALLERY_ALTS[i] || `Pontoon boat rental adventure on Assateague Bay Ocean City MD ${i + 1}`} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+            {GALLERY.map((photo, i) => (
+              <div key={i} className="relative aspect-[4/3] rounded-lg overflow-hidden border border-border group">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/30 via-transparent to-transparent" />
               </div>
             ))}
           </div>
-          <div className="text-center mt-8">
-            <Link href="/gallery" className="inline-flex items-center gap-2 text-blue-brand font-semibold hover:text-blue-dark transition-colors">
-              View Full Gallery
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          <div className="text-center mt-10">
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-border text-ink font-mono text-sm uppercase tracking-[0.14em] rounded-md hover:border-accent/50 hover:bg-surface transition-colors"
+            >
+              Full Gallery
+              <span className="mono-num">→</span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── ALSO EXPLORE ── */}
-      <section className="py-12 bg-white border-t border-gray-border">
+      {/* ═══════════════════════════════════════════════════════
+          ALSO EXPLORE
+      ═══════════════════════════════════════════════════════ */}
+      <section className="py-16 border-y border-border">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-gray-text text-sm">
-            Looking for something faster? Check out our <Link href="/jet-ski" className="text-blue-brand font-semibold hover:underline">guided jet ski tours</Link> on Assateague Bay.
-            View our <Link href="/promotions" className="text-blue-brand font-semibold hover:underline">current deals and promotions</Link>,
-            or see what others are saying in our <Link href="/gallery" className="text-blue-brand font-semibold hover:underline">adventure photo gallery</Link>.
-            Have questions? Visit our <Link href="/faq" className="text-blue-brand font-semibold hover:underline">FAQ page</Link> or <Link href="/contact" className="text-blue-brand font-semibold hover:underline">contact us</Link> directly.
+          <p className="text-ink-dim text-sm md:text-base leading-relaxed">
+            Want something faster?{" "}
+            <Link href="/jet-ski" className="text-accent-hi font-semibold hover:underline">
+              Guided jet ski tours
+            </Link>{" "}
+            run daily.
+            See{" "}
+            <Link href="/promotions" className="text-accent-hi font-semibold hover:underline">
+              current deals
+            </Link>
+            ,{" "}
+            <Link href="/gallery" className="text-accent-hi font-semibold hover:underline">
+              the full gallery
+            </Link>
+            , or{" "}
+            <Link href="/contact" className="text-accent-hi font-semibold hover:underline">
+              message us directly
+            </Link>
+            .
           </p>
         </div>
       </section>
 
-      {/* ── BOTTOM CTA ── */}
-      <section className="relative py-20 overflow-hidden">
-        <Image src={IMAGES.scenery2} alt="Sunset pontoon cruise on Assateague Bay Ocean City Maryland" fill sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-blue-dark/85" />
-        <div className="relative z-10 text-center text-white px-4">
+      {/* ═══════════════════════════════════════════════════════
+          FINAL CTA
+      ═══════════════════════════════════════════════════════ */}
+      <section className="relative py-24 md:py-28 overflow-hidden">
+        <Image
+          src={IMAGES.scenery2}
+          alt="Sunset over Assateague Bay — pontoon boat rentals in Ocean City Maryland"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-deep/90 via-bg-deep/85 to-bg-deep" />
+        <GradientMesh variant="hero" grid />
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
           <ScrollReveal>
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">Ready to Cruise?</h2>
-            <p className="text-white/90 text-lg mb-8 max-w-xl mx-auto">Book your pontoon boat and explore Assateague Bay on your own terms.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="px-10 py-4 bg-yellow-brand text-dark font-bold text-lg rounded-lg hover:bg-yellow-hover transition-colors shadow-xl">Book Now</a>
-              <a href={PHONE_HREF} className="px-10 py-4 border-2 border-white text-white font-bold text-lg rounded-lg hover:bg-white hover:text-blue-brand transition-colors">{PHONE}</a>
+            <TerminalKicker prefix="BOOK" label="READY_TO_CRUISE" className="mb-5 justify-center" />
+            <h2 className="text-4xl md:text-6xl font-bold text-ink mb-6 tracking-tight leading-[1.02]">
+              Ready to<br />
+              <span className="text-accent-hi">captain the day?</span>
+            </h2>
+            <p className="text-base md:text-lg text-ink-dim mb-10 max-w-xl mx-auto">
+              Reserve your pontoon. 2 to 8 hours, up to 10 guests, BYOB friendly.
+              Free parking right at the downtown dock.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-12 py-4 bg-accent text-bg font-bold text-lg rounded-md hover:bg-accent-hi transition-all shadow-[0_0_60px_rgba(212,160,23,0.3)]"
+              >
+                Book Now
+              </a>
+              <a
+                href={PHONE_HREF}
+                className="px-8 py-4 border border-border text-ink font-mono text-sm uppercase tracking-[0.14em] rounded-md hover:border-accent/50 transition-colors"
+              >
+                <span className="mono-num normal-case text-base">{PHONE}</span>
+              </a>
             </div>
+            <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-mute">
+              <a
+                href={ADDRESS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent-hi transition-colors"
+              >
+                ◆ {ADDRESS}
+              </a>
+            </p>
           </ScrollReveal>
         </div>
       </section>
