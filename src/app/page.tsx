@@ -21,7 +21,6 @@ import { TerminalKicker } from "@/components/primitives/TerminalKicker";
 import { StatusPill } from "@/components/primitives/StatusPill";
 import { AnimatedCounter } from "@/components/primitives/AnimatedCounter";
 import { GradientMesh } from "@/components/primitives/GradientMesh";
-import { StatStrip } from "@/components/primitives/StatStrip";
 
 /* ── Gallery image lists ── */
 const GALLERY_ROW_1 = [
@@ -256,17 +255,6 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          JET SKI STATS
-      ═══════════════════════════════════════════════════════ */}
-      <StatStrip
-        stats={[
-          { value: "$129 / HR", label: "Starting Rate" },
-          { value: "UP TO 3", label: "Riders / Ski" },
-          { value: "AGES 5+", label: "Welcome" },
-        ]}
-      />
-
-      {/* ═══════════════════════════════════════════════════════
           FULL-BLEED PHOTO DIVIDER
       ═══════════════════════════════════════════════════════ */}
       <section className="relative h-[45vh] min-h-[320px] max-h-[480px] overflow-hidden border-y border-border">
@@ -356,18 +344,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════════════════
-          PONTOON STATS
-      ═══════════════════════════════════════════════════════ */}
-      <StatStrip
-        stats={[
-          { value: "$329", label: "Starting Rate" },
-          { value: "2–8 HR", label: "Choose Duration" },
-          { value: "UP TO 10", label: "Guests / Boat" },
-          { value: "SELF", label: "Captained" },
-        ]}
-      />
 
       {/* ═══════════════════════════════════════════════════════
           STATS BANNER
