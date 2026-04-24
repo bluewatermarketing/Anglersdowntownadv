@@ -15,6 +15,7 @@ import {
 } from "@/lib/constants";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { faqSchema, serviceSchema, breadcrumbSchema } from "@/components/StructuredData";
+import { InteractiveMap } from "@/components/InteractiveMap";
 import { TerminalKicker } from "@/components/primitives/TerminalKicker";
 import { StatusPill } from "@/components/primitives/StatusPill";
 import { StatStrip } from "@/components/primitives/StatStrip";
@@ -396,6 +397,50 @@ export default function PontoonPage() {
                 </div>
               </ScrollReveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          THE RIDING AREA (MAP)
+      ═══════════════════════════════════════════════════════ */}
+      <section className="relative py-20 md:py-24 overflow-hidden">
+        <GradientMesh variant="subtle" grid={false} />
+        <div className="relative max-w-6xl mx-auto px-4">
+          <ScrollReveal className="text-center mb-10 max-w-2xl mx-auto">
+            <TerminalKicker prefix="MAP" label="OPEN_WATER" className="mb-5 justify-center" />
+            <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
+              Your Bay to Explore
+            </h2>
+            <p className="text-ink-dim text-base md:text-lg mt-4 leading-relaxed">
+              50+ sq mi of open water. Anchor anywhere — sandbars, wild horse shores,
+              sunset spots. No fixed route. You captain the day.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal>
+            <InteractiveMap variant="pontoon" />
+          </ScrollReveal>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-accent" />
+              DOCK
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full" style={{ background: "#22C55E" }} />
+              HORSES
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full" style={{ background: "#F59E0B" }} />
+              SANDBARS
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full" style={{ background: "#F97316" }} />
+              SUNSETS
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full" style={{ background: "#06B6D4" }} />
+              BEACHES
+            </span>
           </div>
         </div>
       </section>

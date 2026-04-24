@@ -260,8 +260,7 @@ export default function Home() {
       ═══════════════════════════════════════════════════════ */}
       <StatStrip
         stats={[
-          { value: "60 MIN", label: "Ride Time" },
-          { value: "$129", label: "Starting Rate" },
+          { value: "$129 / HR", label: "Starting Rate" },
           { value: "UP TO 3", label: "Riders / Ski" },
           { value: "AGES 5+", label: "Welcome" },
         ]}

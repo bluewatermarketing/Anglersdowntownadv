@@ -190,8 +190,8 @@ function createPopupContent(poi: (typeof POINTS_OF_INTEREST)[0]): string {
 }
 
 /* ── Filter pills ── */
-const FILTERS = [
-  { id: "all", label: "All", color: "#1B5FAE" },
+const ALL_FILTERS = [
+  { id: "all", label: "All", color: "#D4A017" },
   { id: "dock", label: "Dock", color: "#F5C518" },
   { id: "horse", label: "Wild Horses", color: "#22C55E" },
   { id: "dolphin", label: "Dolphins", color: "#3B82F6" },
@@ -200,14 +200,34 @@ const FILTERS = [
   { id: "beach", label: "Beaches", color: "#06B6D4" },
 ];
 
+/* Variant-specific filter subsets.
+   jetski: guided tour route is the focus, anchor/sandbar/beach/sunset
+   are more pontoon-specific destinations.
+   pontoon: self-captained, so anchor/sunset/beach are key; no fixed route.
+*/
+const VARIANT_FILTERS: Record<string, string[]> = {
+  all: ["all", "dock", "horse", "dolphin", "anchor", "sunset", "beach"],
+  jetski: ["all", "dock", "horse", "dolphin"],
+  pontoon: ["all", "dock", "horse", "anchor", "sunset", "beach"],
+};
+
+interface InteractiveMapProps {
+  /** "all" shows everything (home page). "jetski" emphasizes the guided
+      route + dock/horses/dolphins. "pontoon" hides the route line and
+      emphasizes destinations you can anchor at. */
+  variant?: "all" | "jetski" | "pontoon";
+}
+
 /* ══════════════════════════════════════════════════════════ */
 
-export function InteractiveMap() {
+export function InteractiveMap({ variant = "all" }: InteractiveMapProps) {
+  const FILTERS = ALL_FILTERS.filter((f) => VARIANT_FILTERS[variant].includes(f.id));
+  const showRouteByDefault = variant !== "pontoon";
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
   const [activeFilter, setActiveFilter] = useState("all");
-  const [showRoute, setShowRoute] = useState(true);
+  const [showRoute, setShowRoute] = useState(showRouteByDefault);
   const [loaded, setLoaded] = useState(false);
 
   /* ── Initialize map ── */
@@ -256,19 +276,19 @@ export function InteractiveMap() {
 
       /* ── Riding area overlay ── */
       L.polygon(RIDING_AREA as [number, number][], {
-        color: "#1B5FAE",
+        color: "#D4A017",
         weight: 2,
         opacity: 0.6,
-        fillColor: "#1B5FAE",
-        fillOpacity: 0.08,
+        fillColor: "#D4A017",
+        fillOpacity: variant === "pontoon" ? 0.12 : 0.07,
         dashArray: "8, 6",
       }).addTo(map);
 
-      /* ── Jet ski tour route ── */
+      /* ── Jet ski tour route (only on jetski/all variants) ── */
       const routeLine = L.polyline(JETSKI_ROUTE as [number, number][], {
         color: "#F5C518",
         weight: 3,
-        opacity: 0.8,
+        opacity: variant === "pontoon" ? 0 : 0.8,
         dashArray: "10, 8",
       }).addTo(map);
 
@@ -315,7 +335,7 @@ export function InteractiveMap() {
         mapInstanceRef.current = null;
       }
     };
-  }, []);
+  }, [variant]);
 
   /* ── Filter markers ── */
   useEffect(() => {
@@ -351,8 +371,8 @@ export function InteractiveMap() {
             onClick={() => setActiveFilter(f.id)}
             className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
               activeFilter === f.id
-                ? "text-white shadow-md scale-105"
-                : "bg-white/80 text-gray-text hover:bg-white border border-gray-border"
+                ? "text-bg shadow-md scale-105"
+                : "bg-surface/80 text-ink-dim hover:bg-surface border border-border hover:border-accent/40"
             }`}
             style={activeFilter === f.id ? { backgroundColor: f.color } : {}}
           >
@@ -360,21 +380,23 @@ export function InteractiveMap() {
           </button>
         ))}
 
-        {/* Route toggle */}
-        <button
-          onClick={() => setShowRoute(!showRoute)}
-          className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all border ${
-            showRoute
-              ? "bg-yellow-brand text-dark border-yellow-brand"
-              : "bg-white/80 text-gray-text border-gray-border hover:bg-white"
-          }`}
-        >
-          {showRoute ? "Hide" : "Show"} Jet Ski Route
-        </button>
+        {/* Route toggle — only offered on variants that use the guided route */}
+        {variant !== "pontoon" && (
+          <button
+            onClick={() => setShowRoute(!showRoute)}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all border ${
+              showRoute
+                ? "bg-accent text-bg border-accent"
+                : "bg-surface/80 text-ink-dim border-border hover:bg-surface"
+            }`}
+          >
+            {showRoute ? "Hide" : "Show"} Jet Ski Route
+          </button>
+        )}
       </div>
 
       {/* Map container */}
-      <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-border">
+      <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border">
         <div
           ref={mapRef}
           className="w-full h-[400px] md:h-[500px] lg:h-[550px]"
@@ -382,40 +404,46 @@ export function InteractiveMap() {
 
         {/* Loading overlay */}
         {!loaded && (
-          <div className="absolute inset-0 bg-blue-dark/90 flex items-center justify-center">
-            <div className="text-center text-white">
-              <div className="w-10 h-10 border-4 border-white/30 border-t-yellow-brand rounded-full animate-spin mx-auto mb-3" />
-              <p className="font-bold text-sm">Loading Map...</p>
+          <div className="absolute inset-0 bg-bg-deep/95 flex items-center justify-center">
+            <div className="text-center text-ink">
+              <div className="w-10 h-10 border-4 border-border border-t-accent rounded-full animate-spin mx-auto mb-3" />
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+                Loading Map...
+              </p>
             </div>
           </div>
         )}
 
         {/* Legend */}
-        <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-gray-border text-xs z-[1000] hidden md:block">
-          <p className="font-bold text-dark mb-2">Legend</p>
+        <div className="absolute bottom-4 left-4 bg-bg/90 backdrop-blur-md rounded-xl p-3 shadow-lg border border-border text-xs z-[1000] hidden md:block">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent mb-2">
+            &gt; Legend
+          </p>
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-0.5 bg-blue-brand opacity-60" style={{ borderTop: "2px dashed #1B5FAE" }} />
-              <span className="text-gray-text">Riding Area</span>
+              <div className="w-6 h-0.5" style={{ borderTop: "2px dashed #D4A017" }} />
+              <span className="text-ink-dim">Riding Area</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-0.5" style={{ borderTop: "2px dashed #F5C518" }} />
-              <span className="text-gray-text">Jet Ski Tour Route</span>
-            </div>
+            {variant !== "pontoon" && (
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-0.5" style={{ borderTop: "2px dashed #F5C518" }} />
+                <span className="text-ink-dim">Jet Ski Route</span>
+              </div>
+            )}
             {[
               { color: "#F5C518", label: "Dock" },
               { color: "#22C55E", label: "Wild Horses" },
-              { color: "#3B82F6", label: "Dolphins" },
-              { color: "#F59E0B", label: "Sandbars" },
-              { color: "#F97316", label: "Sunsets" },
-              { color: "#06B6D4", label: "Beaches" },
+              ...(variant !== "jetski" ? [{ color: "#F59E0B", label: "Sandbars" }] : []),
+              ...(variant !== "pontoon" ? [{ color: "#3B82F6", label: "Dolphins" }] : [{ color: "#3B82F6", label: "Dolphins" }]),
+              ...(variant !== "jetski" ? [{ color: "#F97316", label: "Sunsets" }] : []),
+              ...(variant !== "jetski" ? [{ color: "#06B6D4", label: "Beaches" }] : []),
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-2">
                 <div
-                  className="w-3 h-3 rounded-full border-2 border-white shadow-sm"
+                  className="w-3 h-3 rounded-full border-2 border-bg shadow-sm"
                   style={{ backgroundColor: item.color }}
                 />
-                <span className="text-gray-text">{item.label}</span>
+                <span className="text-ink-dim">{item.label}</span>
               </div>
             ))}
           </div>

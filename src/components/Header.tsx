@@ -79,15 +79,15 @@ export function Header() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-14 md:h-18">
-            {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
+          <div className="flex items-center justify-between h-16 md:h-24">
+            {/* Logo — transparent PNG, sized for presence without dominating the bar */}
+            <Link href="/" className="flex-shrink-0 -my-2">
               <Image
                 src={LOGO_URL}
                 alt={SITE_NAME}
-                width={180}
-                height={60}
-                className="h-10 md:h-14 w-auto"
+                width={320}
+                height={213}
+                className="h-14 md:h-20 w-auto"
                 priority
               />
             </Link>

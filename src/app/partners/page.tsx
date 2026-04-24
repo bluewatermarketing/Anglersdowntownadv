@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { Metadata } from "next";
-import { BOOKING_URL, IMAGES, PARTNERS, PHONE, PHONE_HREF, EMAIL } from "@/lib/constants";
+import { BOOKING_URL, IMAGES, PARTNERS, PHONE, PHONE_HREF, EMAIL, SITE_URL, ADDRESS, ADDRESS_URL } from "@/lib/constants";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { TerminalKicker } from "@/components/primitives/TerminalKicker";
+import { GradientMesh } from "@/components/primitives/GradientMesh";
 
 export const metadata: Metadata = {
   title: "Local Partners | Ocean City MD Restaurants & Businesses | Angler Watersports",
@@ -14,118 +16,120 @@ export const metadata: Metadata = {
     "ocean city md water sports partners",
     "things to do ocean city maryland",
   ],
-  alternates: {
-    canonical: "https://anglerwatersports.com/partners",
-  },
+  alternates: { canonical: `${SITE_URL}/partners` },
   openGraph: {
     images: ["/og-logo.png"],
     title: "Local Partners | Ocean City MD | Angler Watersports",
     description:
       "Exclusive deals from our local partners in Ocean City, MD. Restaurants, activities, and more for our guests.",
-    url: "https://anglerwatersports.com/partners",
+    url: `${SITE_URL}/partners`,
   },
 };
 
 export default function PartnersPage() {
   return (
     <>
-      {/* ── HERO ── */}
-      <section className="relative h-[45vh] min-h-[320px] max-h-[500px] flex items-end justify-center overflow-hidden">
+      {/* HERO */}
+      <section className="relative h-[55vh] min-h-[420px] max-h-[600px] flex items-center justify-center overflow-hidden">
         <Image src={IMAGES.group2} alt="Friends enjoying jet ski and boat rental adventures in Ocean City MD" fill sizes="100vw" className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/25" />
-        <div className="relative z-10 text-center text-white px-4 pb-10 md:pb-14 w-full max-w-4xl mx-auto">
-          <span className="inline-block px-4 py-1.5 bg-yellow-brand text-dark text-xs font-bold uppercase tracking-widest rounded-full mb-4">Local Partners</span>
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-3 drop-shadow-lg tracking-tight">Our Partners</h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-            We team up with the best local businesses in Ocean City to make your visit unforgettable.
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-deep/70 via-bg/60 to-bg" />
+        <GradientMesh variant="hero" grid />
+        <div className="relative z-10 text-center text-ink px-4 max-w-4xl mx-auto">
+          <TerminalKicker prefix="NETWORK" label="LOCAL_PARTNERS" className="mb-5 justify-center" />
+          <h1 className="text-4xl md:text-6xl font-bold leading-[0.95] mb-5 tracking-tight">
+            Our<br />
+            <span className="text-accent-hi">Partners.</span>
+          </h1>
+          <p className="text-base md:text-lg text-ink-dim max-w-2xl mx-auto">
+            We team up with the best local businesses in Ocean City to make your visit
+            unforgettable. Stop by any of these before or after your run.
           </p>
         </div>
       </section>
 
-      {/* ── PARTNER CARDS ── */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="space-y-8">
-            {PARTNERS.map((partner, i) => (
-              <ScrollReveal key={partner.name} delay={i * 100}>
-                <div className="bg-white rounded-2xl shadow-lg border border-gray-border overflow-hidden hover:shadow-xl transition-shadow">
-                  <div className="grid md:grid-cols-3 gap-0">
-                    {/* Logo */}
-                    <div className="bg-gray-light flex items-center justify-center p-10 md:p-12">
-                      <Image
-                        src={partner.logo}
-                        alt={`${partner.name} logo`}
-                        width={200}
-                        height={120}
-                        className="max-h-24 w-auto object-contain"
-                      />
-                    </div>
+      {/* PARTNERS */}
+      <section className="relative py-24 md:py-28 overflow-hidden">
+        <GradientMesh variant="subtle" grid={false} />
+        <div className="relative max-w-5xl mx-auto px-4 space-y-6">
+          {PARTNERS.map((partner, i) => (
+            <ScrollReveal key={partner.name} delay={i * 80}>
+              <div className="bg-surface/40 border border-border rounded-xl overflow-hidden hover:border-accent/40 transition-colors">
+                <div className="grid md:grid-cols-3 gap-0">
+                  {/* Logo panel */}
+                  <div className="bg-bg-deep border-r border-border flex items-center justify-center p-10 md:p-12">
+                    <Image
+                      src={partner.logo}
+                      alt={`${partner.name} logo`}
+                      width={200}
+                      height={120}
+                      className="max-h-24 w-auto object-contain"
+                    />
+                  </div>
 
-                    {/* Info */}
-                    <div className="md:col-span-2 p-6 md:p-8">
-                      <h2 className="text-2xl font-extrabold text-dark mb-3 tracking-tight">{partner.name}</h2>
-                      <p className="text-gray-text leading-relaxed mb-5">{partner.description}</p>
+                  {/* Info */}
+                  <div className="md:col-span-2 p-6 md:p-8">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent mb-3">
+                      &gt; PARTNER · 0{i + 1}
+                    </p>
+                    <h2 className="text-2xl md:text-3xl font-bold text-ink mb-3 tracking-tight">
+                      {partner.name}
+                    </h2>
+                    <p className="text-ink-dim leading-relaxed mb-5">
+                      {partner.description}
+                    </p>
 
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-text mb-6">
-                        <div className="flex items-center gap-1.5">
-                          <svg className="w-4 h-4 text-blue-brand flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          </svg>
-                          {partner.address}
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <svg className="w-4 h-4 text-blue-brand flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          {partner.hours}
-                        </div>
+                    <div className="flex flex-wrap gap-4 text-sm mb-6">
+                      <div className="flex items-center gap-2 text-ink-dim">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent">LOC</span>
+                        {partner.address}
                       </div>
-
-                      <a
-                        href={partner.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-blue-brand text-white font-bold rounded-lg hover:bg-blue-dark transition-colors shadow-md text-sm"
-                      >
-                        Visit Website
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
+                      <div className="flex items-center gap-2 text-ink-dim">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent">HRS</span>
+                        {partner.hours}
+                      </div>
                     </div>
+
+                    <a
+                      href={partner.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-bg font-bold rounded-md hover:bg-accent-hi transition-colors text-sm"
+                    >
+                      Visit Website
+                      <span className="mono-num">↗</span>
+                    </a>
                   </div>
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
-      {/* ── BECOME A PARTNER ── */}
-      <section className="py-16 md:py-20 bg-gray-light">
-        <div className="max-w-4xl mx-auto px-4">
+      {/* BECOME A PARTNER */}
+      <section className="py-20 md:py-24 bg-bg-deep border-y border-border">
+        <div className="max-w-3xl mx-auto px-4">
           <ScrollReveal>
-            <div className="bg-white rounded-2xl p-8 md:p-12 border border-gray-border shadow-lg text-center">
-              <div className="w-16 h-16 bg-blue-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8 text-blue-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h2 className="text-3xl font-extrabold text-dark mb-3 tracking-tight">Become a Partner</h2>
-              <p className="text-gray-text text-lg mb-8 max-w-xl mx-auto">
-                Own a local business in Ocean City? We&apos;re always looking for great partners to team up with. Let&apos;s create something amazing together.
+            <div className="bg-surface/40 border border-border rounded-xl p-8 md:p-12 text-center">
+              <TerminalKicker prefix="OPEN" label="PARTNERSHIPS" className="mb-5 justify-center" />
+              <h2 className="text-3xl md:text-4xl font-bold text-ink mb-4 tracking-tight">
+                Want to Partner With Us?
+              </h2>
+              <p className="text-ink-dim text-base md:text-lg mb-8 max-w-xl mx-auto">
+                Own a local business in Ocean City? We&apos;re always looking for great
+                partners to team up with. Send us a note and let&apos;s talk.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href={`mailto:${EMAIL}?subject=Partnership%20Inquiry`} className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-blue-brand text-white font-bold rounded-lg hover:bg-blue-dark transition-colors shadow-md">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a
+                  href={`mailto:${EMAIL}?subject=Partnership%20Inquiry`}
+                  className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-accent text-bg font-bold rounded-md hover:bg-accent-hi transition-colors"
+                >
                   Email Us
                 </a>
-                <a href={PHONE_HREF} className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border-2 border-blue-brand text-blue-brand font-bold rounded-lg hover:bg-blue-brand hover:text-white transition-colors">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
+                <a
+                  href={PHONE_HREF}
+                  className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-border text-ink font-mono text-sm uppercase tracking-[0.14em] rounded-md hover:border-accent/50 hover:bg-surface transition-colors"
+                >
                   Call {PHONE}
                 </a>
               </div>
@@ -134,15 +138,34 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* ── BOTTOM CTA ── */}
-      <section className="relative py-20 overflow-hidden">
+      {/* FINAL CTA */}
+      <section className="relative py-24 md:py-28 overflow-hidden">
         <Image src={IMAGES.scenery2} alt="Sunset over Assateague Bay Ocean City Maryland" fill sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-blue-dark/85" />
-        <div className="relative z-10 text-center text-white px-4">
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-deep/90 via-bg-deep/85 to-bg-deep" />
+        <GradientMesh variant="hero" grid />
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
           <ScrollReveal>
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">Ready for Your Adventure?</h2>
-            <p className="text-white/90 text-lg mb-8 max-w-xl mx-auto">Book your jet ski or pontoon boat rental and explore what makes Ocean City special.</p>
-            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="px-10 py-4 bg-yellow-brand text-dark font-bold text-lg rounded-lg hover:bg-yellow-hover transition-colors shadow-xl inline-block">Book Now</a>
+            <TerminalKicker prefix="BOOK" label="ADVENTURE" className="mb-5 justify-center" />
+            <h2 className="text-4xl md:text-6xl font-bold text-ink mb-6 tracking-tight leading-[1.02]">
+              Ready for<br />
+              <span className="text-accent-hi">your adventure?</span>
+            </h2>
+            <p className="text-base md:text-lg text-ink-dim mb-10 max-w-xl mx-auto">
+              Book your ride and explore what makes Ocean City special — on and off the water.
+            </p>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-12 py-4 bg-accent text-bg font-bold text-lg rounded-md hover:bg-accent-hi transition-all shadow-[0_0_60px_rgba(212,160,23,0.3)]"
+            >
+              Book Now
+            </a>
+            <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-mute">
+              <a href={ADDRESS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-accent-hi transition-colors">
+                ◆ {ADDRESS}
+              </a>
+            </p>
           </ScrollReveal>
         </div>
       </section>

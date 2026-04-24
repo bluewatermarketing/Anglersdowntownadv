@@ -15,6 +15,7 @@ import {
 } from "@/lib/constants";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { faqSchema, serviceSchema, breadcrumbSchema } from "@/components/StructuredData";
+import { InteractiveMap } from "@/components/InteractiveMap";
 import { TerminalKicker } from "@/components/primitives/TerminalKicker";
 import { StatusPill } from "@/components/primitives/StatusPill";
 import { StatStrip } from "@/components/primitives/StatStrip";
@@ -224,8 +225,7 @@ export default function JetSkiPage() {
       ═══════════════════════════════════════════════════════ */}
       <StatStrip
         stats={[
-          { value: "60 MIN", label: "Ride Time" },
-          { value: "$129", label: "Starting Rate" },
+          { value: "$129 / HR", label: "Starting Rate" },
           { value: "UP TO 3", label: "Riders / Ski" },
           { value: "AGES 5+", label: "Welcome" },
         ]}
@@ -322,6 +322,43 @@ export default function JetSkiPage() {
                 </div>
               </ScrollReveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          THE ROUTE (MAP)
+      ═══════════════════════════════════════════════════════ */}
+      <section className="relative py-20 md:py-24 overflow-hidden">
+        <GradientMesh variant="subtle" grid={false} />
+        <div className="relative max-w-6xl mx-auto px-4">
+          <ScrollReveal className="text-center mb-10 max-w-2xl mx-auto">
+            <TerminalKicker prefix="MAP" label="GUIDED_ROUTE" className="mb-5 justify-center" />
+            <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
+              Know the Route
+            </h2>
+            <p className="text-ink-dim text-base md:text-lg mt-4 leading-relaxed">
+              A 1-hour loop across Assateague Bay. Dock → wild horse habitat →
+              dolphin territory → back. Every ride follows the guided path with a
+              certified lead.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal>
+            <InteractiveMap variant="jetski" />
+          </ScrollReveal>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-accent" />
+              DOCK · 307 DORCHESTER ST
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-success" />
+              HORSES · WILDLIFE ZONE
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full" style={{ background: "#3B82F6" }} />
+              DOLPHINS · BAY &amp; INLET
+            </span>
           </div>
         </div>
       </section>
