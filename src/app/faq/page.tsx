@@ -36,7 +36,7 @@ const sections = [
     title: "Booking & Reservations",
     faqs: [
       { q: "Do I need to make a reservation?", a: "We highly recommend booking online in advance to guarantee your preferred date and time. Walk-ins are accepted based on availability, but weekends and peak season fill up fast." },
-      { q: "How do I book?", a: "Book directly through our website by clicking any Book Now button — it takes you to our secure booking system where you can choose your activity, date, and time. You can also call us at (443) 664-6180." },
+      { q: "How do I book?", a: "Book directly through our website by clicking any Book Now button — it takes you to our secure booking system where you can choose your activity, date, and time. You can also call us at (443) 664-6300." },
       { q: "What is your cancellation policy?", a: "We recommend canceling at least 24 hours before your scheduled rental for a full refund. Cancellations within 24 hours may be subject to a fee. If weather forces a cancellation, we'll work with you to reschedule." },
       { q: "Do you accept walk-ins?", a: "Yes, walk-ins are welcome. However, availability is not guaranteed — especially during peak summer weekends. Booking ahead is your best bet." },
       { q: "What payment methods do you accept?", a: "All major credit cards. Payment is processed at the time of booking through our secure online system." },
@@ -81,7 +81,7 @@ const sections = [
     code: "GEN",
     title: "General",
     faqs: [
-      { q: "Where are you located?", a: "307 Dorchester Street, Ocean City, MD 21842 — right in the heart of downtown Ocean City, on the bay side." },
+      { q: "Where are you located?", a: "312 Talbot Street, Ocean City, MD 21842 — right in the heart of downtown Ocean City, on the bay side." },
       { q: "Is parking free?", a: "Yes. Free parking right at our location. No meters, no hassle." },
       { q: "What are your hours?", a: "Monday through Sunday, 8:30 AM to 8:30 PM during the season." },
       { q: "How early should I arrive?", a: "Arrive 15-20 minutes before your scheduled time to complete check-in and safety briefing." },

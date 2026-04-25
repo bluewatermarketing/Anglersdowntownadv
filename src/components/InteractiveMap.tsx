@@ -9,8 +9,10 @@ import { useEffect, useRef, useState } from "react";
    Leaflet (free, no API key required).
    ────────────────────────────────────────────────────────── */
 
-/* ── Dock & center ── */
-const DOCK = { lat: 38.3365, lng: -75.0849 };
+/* ── Dock & center ──
+   Dock at 312 Talbot Street, Ocean City, MD 21842.
+   Map centered to keep both the dock and Assateague Island visible. */
+const DOCK = { lat: 38.3318, lng: -75.0897 };
 const MAP_CENTER = { lat: 38.295, lng: -75.12 };
 const MAP_ZOOM = 12;
 
@@ -19,10 +21,10 @@ const POINTS_OF_INTEREST = [
   {
     id: "dock",
     label: "Our Dock",
-    subtitle: "307 Dorchester Street",
-    desc: "Your adventure starts here! Check in, get your safety briefing, and hit the water. Free parking right at our location.",
-    lat: 38.3365,
-    lng: -75.0849,
+    subtitle: "312 Talbot Street",
+    desc: "Your adventure starts here. Check in, get your safety briefing, and hit the water. Free parking right at the dock.",
+    lat: 38.3318,
+    lng: -75.0897,
     icon: "dock",
     color: "#F5C518",
   },
@@ -111,12 +113,12 @@ const RIDING_AREA = [
   [38.345, -75.092],
 ];
 
-/* ── Jet ski tour route (approximate) ── */
+/* ── Jet ski tour route (approximate) — starts and ends at 312 Talbot dock */
 const JETSKI_ROUTE = [
-  [38.3365, -75.0849],
-  [38.332, -75.092],
-  [38.325, -75.098],
-  [38.315, -75.108],
+  [38.3318, -75.0897],
+  [38.328, -75.094],
+  [38.322, -75.100],
+  [38.313, -75.108],
   [38.305, -75.115],
   [38.295, -75.120],
   [38.280, -75.128],
@@ -127,10 +129,10 @@ const JETSKI_ROUTE = [
   [38.270, -75.132],
   [38.285, -75.125],
   [38.300, -75.115],
-  [38.315, -75.105],
-  [38.325, -75.096],
-  [38.332, -75.090],
-  [38.3365, -75.0849],
+  [38.313, -75.105],
+  [38.322, -75.097],
+  [38.328, -75.092],
+  [38.3318, -75.0897],
 ];
 
 /* ── SVG icon paths ── */

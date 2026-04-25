@@ -7,24 +7,33 @@
    ────────────────────────────────────────────────────────── */
 
 export const SITE_NAME = "Angler Watersports";
-export const SITE_URL = "https://anglerwatersports.com"; // TODO: swap once domain is live
+export const SITE_URL = "https://anglerwatersports.com";
 export const SITE_TAGLINE = "Premium Watersports. Ocean City, MD.";
 
+/* Booking — currently still routes through OC's FareHarbor account.
+   Swap to Angler's slug once the FareHarbor account is set up. */
 export const BOOKING_URL =
   "https://fareharbor.com/embeds/book/dorchesterstreetjetski/items/?full-items=yes";
 
-export const PHONE = "(443) 664-6180";
-export const PHONE_HREF = "tel:+14436646180";
-export const EMAIL = "dorchesterstreetjetski@gmail.com";
-export const ADDRESS = "307 Dorchester Street, Ocean City, MD 21842";
+/* Geocoded coordinates for 312 Talbot Street, Ocean City, MD 21842
+   (via OpenStreetMap Nominatim). Used in schema and the live weather +
+   interactive map components. */
+export const GEO = { lat: 38.3317957, lng: -75.0896565 };
+
+export const PHONE = "(443) 664-6300";
+export const PHONE_HREF = "tel:+14436646300";
+export const EMAIL = "Anglerwatersports@gmail.com";
+export const ADDRESS = "312 Talbot Street, Ocean City, MD 21842";
 export const ADDRESS_URL =
-  "https://www.google.com/maps/dir//307+Dorchester+St,+Ocean+City,+MD+21842";
+  "https://www.google.com/maps/dir//312+Talbot+St,+Ocean+City,+MD+21842";
 export const HOURS = "Mon - Sun: 8:30 AM – 8:30 PM";
 
+/* Social handles — placeholder until Angler's accounts are live.
+   Swap to Angler's URLs once handles are created. */
 export const SOCIAL = {
-  instagram: "https://instagram.com/ocmd.downtown.adventures",
-  facebook: "https://www.facebook.com/profile.php?id=61561058191598",
-  tiktok: "https://www.tiktok.com/@oc.downtown.adventures",
+  instagram: "",
+  facebook: "",
+  tiktok: "",
 };
 
 export const LOGO_URL = "/angler-logo.png";

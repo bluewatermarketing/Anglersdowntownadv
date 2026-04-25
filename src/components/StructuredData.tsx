@@ -12,15 +12,23 @@
 
 import {
   ADDRESS,
+  ADDRESS_URL,
   PHONE,
   EMAIL,
   BOOKING_URL,
   SOCIAL,
   SITE_NAME,
   SITE_URL,
+  GEO,
 } from "@/lib/constants";
 
 const BUSINESS_ID = `${SITE_URL}/#business`;
+
+/* sameAs accepts only real URLs. Filter out any empty strings until the
+   Angler social accounts go live. */
+const sameAsLinks = [SOCIAL.instagram, SOCIAL.facebook, SOCIAL.tiktok].filter(
+  (u): u is string => !!u && u.length > 0
+);
 
 /* ── LocalBusiness + TouristAttraction schema ── */
 const localBusinessSchema = {
@@ -29,7 +37,7 @@ const localBusinessSchema = {
   "@id": BUSINESS_ID,
   name: SITE_NAME,
   description:
-    "Jet ski and pontoon boat rentals in downtown Ocean City, Maryland. Guided jet ski tours and self-guided pontoon cruises on Assateague Bay. See wild horses, dolphins, and stunning sunsets. Brand-new equipment, free parking.",
+    "Jet ski and pontoon boat rentals in downtown Ocean City, Maryland. Guided jet ski tours and self-captained pontoon cruises on Assateague Bay. See wild horses, dolphins, and stunning sunsets. Brand-new 2026 fleet, free parking.",
   url: SITE_URL,
   telephone: PHONE,
   email: EMAIL,
@@ -38,7 +46,7 @@ const localBusinessSchema = {
   paymentAccepted: "Credit Card",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "307 Dorchester Street",
+    streetAddress: "312 Talbot Street",
     addressLocality: "Ocean City",
     addressRegion: "MD",
     postalCode: "21842",
@@ -46,8 +54,8 @@ const localBusinessSchema = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 38.3365,
-    longitude: -75.0849,
+    latitude: GEO.lat,
+    longitude: GEO.lng,
   },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
@@ -55,41 +63,13 @@ const localBusinessSchema = {
     opens: "08:30",
     closes: "20:30",
   },
-  sameAs: [SOCIAL.instagram, SOCIAL.facebook, SOCIAL.tiktok],
-  hasMap: "https://www.google.com/maps/dir//307+Dorchester+St,+Ocean+City,+MD+21842",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5.0",
-    reviewCount: "50",
-    bestRating: "5",
-    worstRating: "1",
-  },
-  review: [
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Rose-ann V." },
-      datePublished: "2025-08-15",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      reviewBody:
-        "Had an exceptional time! The staff were very kind and professional. The overall quality of the experience was outstanding.",
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Hathem M." },
-      datePublished: "2025-08-20",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      reviewBody:
-        "Rented 6 jet skis with a group that included first-timers. Our guides were incredible — professional, focused on safety, and dedicated to making the experience great.",
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Kristen G." },
-      datePublished: "2025-09-01",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      reviewBody:
-        "The best jet ski experience I have ever had! The atmosphere was so welcoming and the staff were genuinely invested in making sure we had a great time.",
-    },
-  ],
+  ...(sameAsLinks.length > 0 ? { sameAs: sameAsLinks } : {}),
+  hasMap: ADDRESS_URL,
+  /* aggregateRating and review are intentionally OMITTED.
+     Angler Watersports is launching for the 2026 season and has not yet
+     accumulated its own Google reviews. Re-add these blocks ONLY when
+     Angler has its own Google Business Profile reviews. Borrowing OC's
+     reviews would create a duplicate-content signal and is dishonest. */
   makesOffer: [
     {
       "@type": "Offer",

@@ -321,41 +321,46 @@ export default function PromotionsPage() {
         </div>
       </section>
 
-      {/* FLASH DEALS (SOCIAL) */}
-      <section className="py-20 md:py-24 bg-bg-deep border-y border-border">
-        <div className="max-w-3xl mx-auto px-4">
-          <ScrollReveal>
-            <div className="bg-surface/40 border border-border rounded-xl p-8 md:p-12 text-center">
-              <TerminalKicker prefix="FLASH" label="FOLLOW_FOR_MORE" className="mb-5 justify-center" />
-              <h2 className="text-2xl md:text-3xl font-bold text-ink mb-3 tracking-tight">
-                Flash Deals &amp; Pop-Ups
-              </h2>
-              <p className="text-ink-dim text-base mb-8 max-w-xl mx-auto">
-                Last-minute deals, flash sales, and exclusive promos drop on our
-                Instagram and TikTok.
-              </p>
-              <div className="flex justify-center gap-3">
-                <a
-                  href={SOCIAL.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-border text-ink font-mono text-sm uppercase tracking-[0.14em] rounded-md hover:border-accent/50 hover:bg-surface transition-colors"
-                >
-                  Instagram ↗
-                </a>
-                <a
-                  href={SOCIAL.tiktok}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-border text-ink font-mono text-sm uppercase tracking-[0.14em] rounded-md hover:border-accent/50 hover:bg-surface transition-colors"
-                >
-                  TikTok ↗
-                </a>
+      {/* FLASH DEALS (SOCIAL) — only shown when at least one social account is live */}
+      {(SOCIAL.instagram || SOCIAL.tiktok || SOCIAL.facebook) && (
+        <section className="py-20 md:py-24 bg-bg-deep border-y border-border">
+          <div className="max-w-3xl mx-auto px-4">
+            <ScrollReveal>
+              <div className="bg-surface/40 border border-border rounded-xl p-8 md:p-12 text-center">
+                <TerminalKicker prefix="FLASH" label="FOLLOW_FOR_MORE" className="mb-5 justify-center" />
+                <h2 className="text-2xl md:text-3xl font-bold text-ink mb-3 tracking-tight">
+                  Flash Deals &amp; Pop-Ups
+                </h2>
+                <p className="text-ink-dim text-base mb-8 max-w-xl mx-auto">
+                  Last-minute deals, flash sales, and exclusive promos drop on our socials.
+                </p>
+                <div className="flex justify-center gap-3 flex-wrap">
+                  {SOCIAL.instagram && (
+                    <a
+                      href={SOCIAL.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 border border-border text-ink font-mono text-sm uppercase tracking-[0.14em] rounded-md hover:border-accent/50 hover:bg-surface transition-colors"
+                    >
+                      Instagram ↗
+                    </a>
+                  )}
+                  {SOCIAL.tiktok && (
+                    <a
+                      href={SOCIAL.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 border border-border text-ink font-mono text-sm uppercase tracking-[0.14em] rounded-md hover:border-accent/50 hover:bg-surface transition-colors"
+                    >
+                      TikTok ↗
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
 
       {/* FINAL CTA */}
       <section className="relative py-24 md:py-28 overflow-hidden">

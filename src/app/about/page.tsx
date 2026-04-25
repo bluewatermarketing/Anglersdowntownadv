@@ -23,24 +23,25 @@ import { StatStrip } from "@/components/primitives/StatStrip";
 import { GradientMesh } from "@/components/primitives/GradientMesh";
 
 export const metadata: Metadata = {
-  title: "About Us | Family-Owned Jet Ski & Boat Rental | Ocean City MD",
+  title: "About | Premium Jet Ski & Pontoon Rentals | Angler Watersports Ocean City MD",
   description:
-    "Meet the team behind Angler Watersports — Ocean City MD's top-rated jet ski and pontoon boat rental. Brand-new 2026 fleet, 5-star Google reviews, free downtown parking.",
+    "Angler Watersports is a new operator on Assateague Bay launching for the 2026 season. Brand-new fleet, certified guides, downtown dock at 312 Talbot Street, and 50+ square miles of open water.",
   keywords: [
     "ocean city md water sports",
     "jet ski rental ocean city md",
     "pontoon boat rental ocean city maryland",
-    "family owned boat rental ocean city",
+    "premium boat rental ocean city",
     "Angler Watersports",
-    "water sports ocean city md",
-    "boat rental downtown ocean city",
+    "new jet ski rental ocean city",
+    "downtown ocean city boat dock",
+    "312 Talbot Street",
   ],
   alternates: { canonical: `${SITE_URL}/about` },
   openGraph: {
     images: ["/og-logo.png"],
-    title: "About Us | Family-Owned Jet Ski & Boat Rental | Ocean City MD",
+    title: "About | Premium Jet Ski & Pontoon Rentals | Angler Watersports",
     description:
-      "Meet the team behind Angler Watersports — Ocean City's top-rated jet ski and pontoon boat rental.",
+      "Angler Watersports is a new operator on Assateague Bay. Brand-new fleet, certified guides, downtown dock.",
     url: `${SITE_URL}/about`,
   },
 };
@@ -49,22 +50,22 @@ const VALUES = [
   {
     code: "01",
     title: "Safety, Always",
-    desc: "Equipment inspected daily. Certified guide on every jet ski ride. Full orientation before every rental. No exceptions.",
+    desc: "Equipment inspected daily. Maryland-certified guide on every jet ski run. Full safety briefing before every rental. No exceptions.",
   },
   {
     code: "02",
-    title: "Newest Fleet in OC",
-    desc: "Brand-new jet skis and well-maintained pontoon boats every season. You'll never ride something outdated.",
+    title: "Brand-New Fleet",
+    desc: "Every jet ski and pontoon in our fleet is the latest model. No old equipment dressed up as new. You ride what we'd ride ourselves.",
   },
   {
     code: "03",
-    title: "Best Location Downtown",
-    desc: "307 Dorchester Street puts you right in the heart of Ocean City with direct access to Assateague Bay — the largest riding area in town.",
+    title: "Downtown Dock",
+    desc: "312 Talbot Street puts you on the largest riding area in Ocean City — direct bay access, free parking, no traffic to fight.",
   },
   {
     code: "04",
-    title: "Real People, Real Passion",
-    desc: "We grew up on this bay — fishing, riding, watching sunsets over Assateague. This is our home, and we love sharing it.",
+    title: "No Shortcuts",
+    desc: "Professional guides. Premium gear. Real safety standards. The cleanest watersports experience in Ocean City — the one we'd want for ourselves.",
   },
 ];
 
@@ -94,15 +95,15 @@ export default function AboutPage() {
         <GradientMesh variant="hero" grid />
         <div className="relative z-10 text-center text-ink px-4 max-w-4xl mx-auto py-16">
           <div className="flex justify-center mb-5">
-            <StatusPill tone="success" label="Family Owned · Ocean City, MD" />
+            <StatusPill tone="accent" label="Launching 2026 Season" />
           </div>
           <TerminalKicker prefix="ABOUT" label="ANGLER_WATERSPORTS" className="mb-5 justify-center" />
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6 tracking-tight">
-            Born on the bay.<br />
-            <span className="text-accent-hi">Built for you.</span>
+            A new standard<br />
+            <span className="text-accent-hi">on Assateague Bay.</span>
           </h1>
           <p className="text-base md:text-lg text-ink-dim mb-8 max-w-2xl mx-auto">
-            Family owned, locally operated, obsessed with getting people out on the water.
+            Brand-new fleet. Certified guides. Downtown dock. No shortcuts.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
@@ -126,9 +127,8 @@ export default function AboutPage() {
       {/* BADGES STRIP */}
       <StatStrip
         stats={[
-          { value: "FAMILY", label: "Owned & Operated" },
-          { value: "5.0★", label: "Google Rated" },
           { value: "2026", label: "Brand-New Fleet" },
+          { value: "50+", label: "Sq Mi Riding Area" },
           { value: "FREE", label: "Downtown Parking" },
         ]}
         compact
@@ -140,26 +140,32 @@ export default function AboutPage() {
         <div className="relative max-w-6xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <ScrollReveal direction="left">
-              <TerminalKicker prefix="STORY" label="OUR_ORIGIN" className="mb-5" />
+              <TerminalKicker prefix="STORY" label="WHY_ANGLER" className="mb-5" />
               <h2 className="text-4xl md:text-5xl font-bold text-ink mb-6 leading-[1.05] tracking-tight">
-                Local kids,<br />
-                <span className="text-accent-hi">local business.</span>
+                Built<br />
+                <span className="text-accent-hi">deliberately.</span>
               </h2>
               <div className="text-ink-dim text-base md:text-lg leading-relaxed space-y-4 max-w-lg">
                 <p>
-                  Angler Watersports started simple: share our love for Ocean City&apos;s
-                  waterways. We grew up on this bay — fishing, crabbing, riding, and
-                  watching sunsets over Assateague.
+                  Angler Watersports launched for the 2026 season with one
+                  deliberate choice: every jet ski and pontoon in the fleet is
+                  the latest model, every guide is Maryland-certified, every
+                  safety briefing runs before the engine starts. No shortcuts.
+                  No old equipment dressed up as new.
                 </p>
                 <p>
-                  Today we operate out of <strong className="text-ink">307 Dorchester Street</strong>,
-                  right in downtown Ocean City, offering jet ski and pontoon rentals on
-                  the largest and most scenic riding area in town.
+                  The dock at <strong className="text-ink">312 Talbot Street</strong>{" "}
+                  puts you on the largest riding area in Ocean City — 50+ square
+                  miles of open bay water, with Assateague Island&apos;s wild
+                  horse coastline a short run away. We chose downtown deliberately:
+                  free parking, fast water access, no traffic to start your day.
                 </p>
                 <p>
-                  Brand-new equipment inspected daily. Certified guides who genuinely
-                  care. A commitment to safety that never wavers. Rent with us and
-                  you&apos;re not a customer — you&apos;re family.
+                  What we offer is the run done right. A guided 1-hour jet ski
+                  tour for first-timers and veterans alike, or a self-captained
+                  pontoon for groups up to ten who want the bay on their own
+                  terms. The cleanest watersports experience in Ocean City — the
+                  one we&apos;d want for ourselves.
                 </p>
               </div>
             </ScrollReveal>
@@ -289,7 +295,7 @@ export default function AboutPage() {
               Find Us
             </h2>
             <p className="text-ink-dim text-base md:text-lg mt-4">
-              307 Dorchester Street. Free parking. Right in downtown.
+              312 Talbot Street. Free parking. Right in downtown.
             </p>
           </ScrollReveal>
 
@@ -297,7 +303,7 @@ export default function AboutPage() {
             <ScrollReveal className="lg:col-span-3">
               <div className="relative rounded-xl overflow-hidden border border-border h-[360px] md:h-[440px]">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3116.8!2d-75.0876!3d38.3364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b8d7c7b0c85c2b%3A0x1234567890!2s307+Dorchester+St%2C+Ocean+City%2C+MD+21842!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                  src="https://maps.google.com/maps?q=312+Talbot+Street+Ocean+City+MD+21842&z=15&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0, filter: "grayscale(0.25) contrast(1.05)" }}
@@ -334,24 +340,26 @@ export default function AboutPage() {
                   <p className="text-ink text-sm">{HOURS}</p>
                 </div>
 
-                <div className="pt-2 flex gap-2">
-                  {[
-                    { href: SOCIAL.instagram, label: "IG" },
-                    { href: SOCIAL.facebook, label: "FB" },
-                    { href: SOCIAL.tiktok, label: "TT" },
-                  ].map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={s.label}
-                      className="w-10 h-10 border border-border rounded-md flex items-center justify-center font-mono text-[11px] font-bold tracking-widest text-ink-dim hover:text-accent-hi hover:border-accent/50 hover:bg-accent/5 transition-colors"
-                    >
-                      {s.label}
-                    </a>
-                  ))}
-                </div>
+                {(SOCIAL.instagram || SOCIAL.facebook || SOCIAL.tiktok) && (
+                  <div className="pt-2 flex gap-2">
+                    {[
+                      { href: SOCIAL.instagram, label: "IG" },
+                      { href: SOCIAL.facebook, label: "FB" },
+                      { href: SOCIAL.tiktok, label: "TT" },
+                    ].filter((s) => s.href).map((s) => (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={s.label}
+                        className="w-10 h-10 border border-border rounded-md flex items-center justify-center font-mono text-[11px] font-bold tracking-widest text-ink-dim hover:text-accent-hi hover:border-accent/50 hover:bg-accent/5 transition-colors"
+                      >
+                        {s.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             </ScrollReveal>
           </div>

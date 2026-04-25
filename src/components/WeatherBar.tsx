@@ -19,8 +19,9 @@ interface WeatherData {
   icon: "sun" | "partly" | "cloudy" | "rain" | "storm";
 }
 
-const LAT = 38.3365;
-const LON = -75.0849;
+/* 312 Talbot Street, Ocean City MD */
+const LAT = 38.3318;
+const LON = -75.0897;
 const NOAA_STATION = "8570283";
 
 function weatherIcon(code: number): WeatherData["icon"] {
@@ -136,7 +137,7 @@ export function WeatherBar() {
             </span>
             <span className="text-accent">LIVE</span>
             <span className="text-ink-mute">·</span>
-            <span>Assateague Bay · 38.3365°N 75.0849°W</span>
+            <span>Assateague Bay · 38.3318°N 75.0897°W</span>
           </span>
           <span className="hidden sm:inline mono-num">
             {timestamp}

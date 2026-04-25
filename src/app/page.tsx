@@ -5,7 +5,6 @@ import {
   IMAGES,
   HERO_VIDEO_URL,
   HERO_FALLBACK_IMAGE,
-  REVIEWS,
   PHONE,
   PHONE_HREF,
   ADDRESS,
@@ -128,7 +127,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
             <StatusPill tone="success" label="Now Booking 2026 Season" />
             <span className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface/60 border border-border backdrop-blur-sm font-mono text-[10px] uppercase tracking-[0.14em] text-ink-dim">
-              <span className="text-accent">★</span> 5.0 · Google Reviews
+              <span className="text-accent">●</span> Brand-New Fleet · 312 Talbot St
             </span>
           </div>
 
@@ -355,16 +354,15 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
             {[
-              { value: 500, suffix: "+", label: "HAPPY GUESTS", sub: "2025 SEASON" },
-              { value: 5.0, suffix: "★", decimals: 1, label: "GOOGLE RATING", sub: "50+ REVIEWS" },
+              { value: 60, suffix: "", label: "MIN GUIDED RUN", sub: "JET SKI TOUR" },
               { value: 50, suffix: "+", label: "SQ MI OF WATER", sub: "RIDING AREA" },
+              { value: 10, suffix: "", label: "MAX GUESTS", sub: "PER PONTOON" },
               { value: 100, suffix: "%", label: "NEW FLEET", sub: "2026 EQUIPMENT" },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-start md:items-center text-left md:text-center">
                 <p className="mono-num text-4xl md:text-5xl lg:text-6xl font-bold text-accent-hi leading-none tracking-tight">
                   <AnimatedCounter
                     value={stat.value}
-                    decimals={stat.decimals ?? 0}
                     suffix={stat.suffix}
                   />
                 </p>
@@ -584,7 +582,7 @@ export default function Home() {
             <div className="hidden md:block absolute top-8 left-[16%] right-[16%] h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
             {[
               { step: "01", title: "Reserve", desc: "Pick your rental, pick your slot. Instant confirmation, secure payment." },
-              { step: "02", title: "Check In", desc: "Arrive at 307 Dorchester. Free parking. Safety briefing, life vests, keys." },
+              { step: "02", title: "Check In", desc: "Arrive at 312 Talbot. Free parking. Safety briefing, life vests, keys." },
               { step: "03", title: "Run the Bay", desc: "Wild horses. Dolphins. Sunsets. Memory made on Assateague." },
             ].map((item, i) => (
               <ScrollReveal key={item.step} delay={i * 150}>
@@ -751,60 +749,49 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          REVIEWS
+          WHAT YOU CAN EXPECT
       ═══════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-28">
         <div className="max-w-7xl mx-auto px-4">
           <ScrollReveal className="text-center mb-14 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-md bg-surface border border-border mb-6">
-              <div className="flex items-center gap-0.5">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <svg key={s} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
-                <span className="mono-num text-ink text-sm">5.0</span> · Google Reviews
-              </span>
-            </div>
-
-            <TerminalKicker prefix="GUESTS" label="VERIFIED" className="mb-5" />
+            <TerminalKicker prefix="STANDARDS" label="EVERY_RUN" className="mb-5 justify-center" />
             <h2 className="text-4xl md:text-5xl font-bold text-ink tracking-tight">
-              What Our Guests Say
+              What You Can Expect
             </h2>
+            <p className="text-ink-dim text-base md:text-lg mt-4 leading-relaxed">
+              Every run with Angler Watersports follows the same standards. No
+              shortcuts, no surprises, no asterisks.
+            </p>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
-            {REVIEWS.map((review, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <div className="relative bg-surface/40 p-6 rounded-xl border border-border hover:border-accent/40 hover:bg-surface transition-all h-full">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-0.5">
-                      {Array.from({ length: review.rating }).map((_, s) => (
-                        <svg key={s} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-mute">
-                      {review.source}
-                    </span>
-                  </div>
-                  <p className="text-ink-dim leading-relaxed text-sm mb-6">
-                    &ldquo;{review.text}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-border">
-                    <div className="w-9 h-9 rounded-md bg-accent/10 border border-accent/40 text-accent-hi flex items-center justify-center text-sm font-bold">
-                      {review.name[0]}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-ink text-sm">{review.name}</p>
-                      <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-mute">
-                        Verified Guest
-                      </p>
-                    </div>
-                  </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {[
+              {
+                code: "01",
+                title: "Brand-New Fleet",
+                desc: "Every jet ski and pontoon is the latest model. Inspected daily, maintained obsessively.",
+              },
+              {
+                code: "02",
+                title: "Certified Guides",
+                desc: "Maryland-certified lead on every jet ski tour. Professional safety briefing before the engine starts.",
+              },
+              {
+                code: "03",
+                title: "Largest Riding Area",
+                desc: "50+ square miles of Assateague Bay — wild horse coastline, dolphin territory, sandbars, sunsets.",
+              },
+              {
+                code: "04",
+                title: "Free Parking, No Surprises",
+                desc: "Pull right up to 312 Talbot. Free parking at the dock. Life vests included. No upsells.",
+              },
+            ].map((item, i) => (
+              <ScrollReveal key={item.code} delay={i * 80}>
+                <div className="bg-surface/40 p-6 rounded-xl border border-border hover:border-accent/40 hover:bg-surface transition-all h-full">
+                  <p className="mono-num text-3xl font-bold text-accent-hi mb-4">{item.code}</p>
+                  <h3 className="text-ink font-bold text-lg mb-2 tracking-tight">{item.title}</h3>
+                  <p className="text-ink-dim text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}

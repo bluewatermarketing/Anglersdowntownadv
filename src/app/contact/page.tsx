@@ -20,7 +20,7 @@ import { GradientMesh } from "@/components/primitives/GradientMesh";
 export const metadata: Metadata = {
   title: "Contact Us | Jet Ski & Boat Rental Ocean City MD | Angler Watersports",
   description:
-    "Contact Angler Watersports for jet ski and pontoon boat rentals in Ocean City, MD. Call (443) 664-6180, email, or message us. Open daily 8:30 AM – 8:30 PM. Free parking downtown.",
+    "Contact Angler Watersports for jet ski and pontoon boat rentals in Ocean City, MD. Call (443) 664-6300, email, or message us. Open daily 8:30 AM – 8:30 PM. Free parking downtown.",
   keywords: [
     "contact ocean city jet ski rental",
     "Angler Watersports phone number",
@@ -158,25 +158,27 @@ export default function ContactPage() {
                 })}
               </div>
 
-              {/* Socials */}
-              <div className="mt-6 flex gap-2">
-                {[
-                  { href: SOCIAL.instagram, label: "IG" },
-                  { href: SOCIAL.facebook, label: "FB" },
-                  { href: SOCIAL.tiktok, label: "TT" },
-                ].map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.label}
-                    className="w-11 h-11 border border-border rounded-md flex items-center justify-center font-mono text-[11px] font-bold tracking-widest text-ink-dim hover:text-accent-hi hover:border-accent/50 hover:bg-accent/5 transition-colors"
-                  >
-                    {s.label}
-                  </a>
-                ))}
-              </div>
+              {/* Socials — hidden until Angler accounts are live */}
+              {(SOCIAL.instagram || SOCIAL.facebook || SOCIAL.tiktok) && (
+                <div className="mt-6 flex gap-2">
+                  {[
+                    { href: SOCIAL.instagram, label: "IG" },
+                    { href: SOCIAL.facebook, label: "FB" },
+                    { href: SOCIAL.tiktok, label: "TT" },
+                  ].filter((s) => s.href).map((s) => (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      className="w-11 h-11 border border-border rounded-md flex items-center justify-center font-mono text-[11px] font-bold tracking-widest text-ink-dim hover:text-accent-hi hover:border-accent/50 hover:bg-accent/5 transition-colors"
+                    >
+                      {s.label}
+                    </a>
+                  ))}
+                </div>
+              )}
             </ScrollReveal>
 
             {/* Form */}

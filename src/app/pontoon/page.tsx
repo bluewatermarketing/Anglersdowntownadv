@@ -6,7 +6,6 @@ import {
   IMAGES,
   PHONE,
   PHONE_HREF,
-  REVIEWS,
   HERO_VIDEO_URL,
   HERO_FALLBACK_IMAGE,
   ADDRESS,
@@ -90,7 +89,7 @@ const ITINERARY = [
   { time: "1:00", step: "Anchor at Assateague", desc: "Watch wild horses along the shoreline up close." },
   { time: "2:00", step: "Swim + sandbars", desc: "Jump in, wade, or just soak up the sun on a bar." },
   { time: "3:00", step: "Scenic return", desc: "Head back as the afternoon light hits the water." },
-  { time: "4:00", step: "Back at dock", desc: "Arrive at Dorchester Street with a full memory card." },
+  { time: "4:00", step: "Back at dock", desc: "Arrive at Talbot Street with a full memory card." },
 ];
 
 const PRICING = [
@@ -638,59 +637,43 @@ export default function PontoonPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          REVIEWS
+          WHAT YOU CAN EXPECT
       ═══════════════════════════════════════════════════════ */}
       <section className="py-20 md:py-24 bg-bg-deep border-y border-border">
         <div className="max-w-6xl mx-auto px-4">
           <ScrollReveal className="text-center mb-12 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-md bg-surface border border-border mb-6">
-              <div className="flex items-center gap-0.5">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <svg key={s} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
-                <span className="mono-num text-ink text-sm">5.0</span> · Google Reviews
-              </span>
-            </div>
-            <TerminalKicker prefix="GUESTS" label="VERIFIED" className="mb-5" />
+            <TerminalKicker prefix="STANDARDS" label="EVERY_PONTOON" className="mb-5 justify-center" />
             <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
-              What Guests Say
+              What You Can Expect
             </h2>
+            <p className="text-ink-dim text-base md:text-lg mt-4 leading-relaxed">
+              Every pontoon rental from Angler comes the same way.
+            </p>
           </ScrollReveal>
 
           <div className="grid md:grid-cols-3 gap-4">
-            {REVIEWS.slice(3, 6).map((r, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
+            {[
+              {
+                code: "01",
+                title: "Latest-Model Pontoons",
+                desc: "Brand-new boats with built-in canopies, Bluetooth audio, and clean upholstery. Inspected before every departure.",
+              },
+              {
+                code: "02",
+                title: "Full Orientation",
+                desc: "Complete walk-through before you leave the dock. No prior boating experience needed — you'll know the boat by departure.",
+              },
+              {
+                code: "03",
+                title: "Captain Your Day",
+                desc: "Self-captained: anchor at sandbars, beach near wild horses, cruise into sunset. Up to 10 guests. BYOB. Your call.",
+              },
+            ].map((item, i) => (
+              <ScrollReveal key={item.code} delay={i * 100}>
                 <div className="bg-surface/40 border border-border rounded-xl p-6 hover:border-accent/40 hover:bg-surface transition-all h-full">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-0.5">
-                      {Array.from({ length: r.rating }).map((_, s) => (
-                        <svg key={s} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-mute">
-                      {r.source}
-                    </span>
-                  </div>
-                  <p className="text-ink-dim leading-relaxed text-sm mb-6">
-                    &ldquo;{r.text}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-border">
-                    <div className="w-9 h-9 rounded-md bg-accent/10 border border-accent/40 text-accent-hi flex items-center justify-center text-sm font-bold">
-                      {r.name[0]}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-ink text-sm">{r.name}</p>
-                      <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-mute">
-                        Verified Guest
-                      </p>
-                    </div>
-                  </div>
+                  <p className="mono-num text-3xl font-bold text-accent-hi mb-4">{item.code}</p>
+                  <h3 className="text-ink font-bold text-lg mb-2 tracking-tight">{item.title}</h3>
+                  <p className="text-ink-dim text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}

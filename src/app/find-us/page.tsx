@@ -15,12 +15,12 @@ import { TerminalKicker } from "@/components/primitives/TerminalKicker";
 import { GradientMesh } from "@/components/primitives/GradientMesh";
 
 export const metadata: Metadata = {
-  title: "Find Us | 307 Dorchester St, Ocean City MD | Jet Ski & Boat Rental Location",
+  title: "Find Us | 312 Talbot St, Ocean City MD | Jet Ski & Boat Rental Location",
   description:
-    "Visit Angler Watersports at 307 Dorchester Street, Ocean City, MD 21842. Free parking, right in downtown on the bay. Get directions to the best jet ski and pontoon boat rental in Ocean City.",
+    "Visit Angler Watersports at 312 Talbot Street, Ocean City, MD 21842. Free parking, right in downtown on the bay. Get directions to the best jet ski and pontoon boat rental in Ocean City.",
   keywords: [
     "Angler Watersports location",
-    "307 Dorchester Street Ocean City MD",
+    "312 Talbot Street Ocean City MD",
     "ocean city jet ski directions",
     "pontoon boat rental location ocean city",
     "boat rental downtown ocean city maryland",
@@ -29,9 +29,9 @@ export const metadata: Metadata = {
   alternates: { canonical: `${SITE_URL}/find-us` },
   openGraph: {
     images: ["/og-logo.png"],
-    title: "Find Us | 307 Dorchester St, Ocean City MD",
+    title: "Find Us | 312 Talbot St, Ocean City MD",
     description:
-      "Visit Angler Watersports at 307 Dorchester Street, Ocean City, MD. Free parking, right downtown.",
+      "Visit Angler Watersports at 312 Talbot Street, Ocean City, MD. Free parking, right downtown.",
     url: `${SITE_URL}/find-us`,
   },
 };
@@ -69,7 +69,7 @@ export default function FindUsPage() {
             <span className="text-accent-hi">the dock.</span>
           </h1>
           <p className="text-base md:text-lg text-ink-dim max-w-2xl mx-auto">
-            307 Dorchester Street, right in the heart of downtown Ocean City. Free parking.
+            312 Talbot Street, right in the heart of downtown Ocean City. Free parking.
           </p>
         </div>
       </section>
@@ -83,7 +83,7 @@ export default function FindUsPage() {
             <ScrollReveal className="lg:col-span-3">
               <div className="relative rounded-xl overflow-hidden border border-border h-[400px] md:h-[520px]">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3116.8!2d-75.0876!3d38.3364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b8d7c7b0c85c2b%3A0x1234567890!2s307+Dorchester+St%2C+Ocean+City%2C+MD+21842!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                  src="https://maps.google.com/maps?q=312+Talbot+Street+Ocean+City+MD+21842&z=15&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0, filter: "grayscale(0.25) contrast(1.05)" }}
@@ -94,7 +94,7 @@ export default function FindUsPage() {
                   className="absolute inset-0"
                 />
                 <div className="pointer-events-none absolute top-4 left-4 px-3 py-1.5 bg-bg/90 backdrop-blur-md border border-accent/40 rounded font-mono text-[10px] uppercase tracking-[0.18em] text-accent-hi">
-                  ● DOCK · 38.3365°N 75.0849°W
+                  ● DOCK · 38.3318°N 75.0897°W
                 </div>
               </div>
             </ScrollReveal>
@@ -102,7 +102,7 @@ export default function FindUsPage() {
             {/* Info panel */}
             <ScrollReveal direction="right" className="lg:col-span-2">
               <div className="bg-surface/40 border border-border rounded-xl p-6 md:p-8 h-full">
-                <TerminalKicker prefix="DOCK" label="307_DORCHESTER" className="mb-5" />
+                <TerminalKicker prefix="DOCK" label="312_TALBOT" className="mb-5" />
                 <div className="space-y-5">
                   <a href={ADDRESS_URL} target="_blank" rel="noopener noreferrer" className="block group">
                     <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-mute mb-1">Address</h3>
@@ -159,7 +159,7 @@ export default function FindUsPage() {
           </ScrollReveal>
           <div className="grid md:grid-cols-3 gap-3">
             {[
-              { src: IMAGES.pontoon4, alt: "Pontoon boats docked at 307 Dorchester Street Ocean City MD" },
+              { src: IMAGES.pontoon4, alt: "Pontoon boats docked at 312 Talbot Street Ocean City MD" },
               { src: IMAGES.group3, alt: "Guests preparing for jet ski rental at our downtown Ocean City dock" },
               { src: IMAGES.pontoon5, alt: "Pontoon boat rental launch area on Assateague Bay" },
             ].map((photo, i) => (
@@ -195,12 +195,12 @@ export default function FindUsPage() {
               {
                 tag: "N",
                 title: "From the North (Boardwalk Area)",
-                desc: "Head south on Philadelphia Ave (Coastal Hwy) toward downtown. Turn right onto Dorchester Street. 307 Dorchester is on the bay side.",
+                desc: "Head south on Philadelphia Ave (Coastal Hwy) toward downtown. Turn right onto Talbot Street. 312 Talbot is on the bay side.",
               },
               {
                 tag: "S",
                 title: "From the South (Rt 50 / West OC)",
-                desc: "Cross the Route 50 bridge into Ocean City. Dorchester Street is one of the first streets downtown. Turn right, head toward the bay.",
+                desc: "Cross the Route 50 bridge into Ocean City. Talbot Street is one of the first streets downtown. Turn right, head toward the bay.",
               },
             ].map((d, i) => (
               <ScrollReveal key={d.tag} delay={i * 100}>

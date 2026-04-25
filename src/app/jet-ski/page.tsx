@@ -6,7 +6,6 @@ import {
   IMAGES,
   PHONE,
   PHONE_HREF,
-  REVIEWS,
   HERO_VIDEO_URL,
   HERO_FALLBACK_IMAGE,
   ADDRESS,
@@ -448,59 +447,43 @@ export default function JetSkiPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          REVIEWS
+          WHAT YOU CAN EXPECT
       ═══════════════════════════════════════════════════════ */}
       <section className="py-20 md:py-24 bg-bg-deep border-y border-border">
         <div className="max-w-6xl mx-auto px-4">
           <ScrollReveal className="text-center mb-12 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-md bg-surface border border-border mb-6">
-              <div className="flex items-center gap-0.5">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <svg key={s} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
-                <span className="mono-num text-ink text-sm">5.0</span> · Google Reviews
-              </span>
-            </div>
-            <TerminalKicker prefix="GUESTS" label="VERIFIED" className="mb-5" />
+            <TerminalKicker prefix="STANDARDS" label="EVERY_RUN" className="mb-5 justify-center" />
             <h2 className="text-3xl md:text-5xl font-bold text-ink tracking-tight">
-              What Riders Say
+              What You Can Expect
             </h2>
+            <p className="text-ink-dim text-base md:text-lg mt-4 leading-relaxed">
+              Every guided jet ski run with Angler follows the same standards.
+            </p>
           </ScrollReveal>
 
           <div className="grid md:grid-cols-3 gap-4">
-            {REVIEWS.slice(0, 3).map((r, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
+            {[
+              {
+                code: "01",
+                title: "Maryland-Certified Lead",
+                desc: "Every ride is led by a Maryland-certified guide. Full safety briefing before launch, expert routing on the water.",
+              },
+              {
+                code: "02",
+                title: "Brand-New Jet Skis",
+                desc: "The latest models, inspected daily. No old equipment dressed up as new — ever.",
+              },
+              {
+                code: "03",
+                title: "Premium Route",
+                desc: "1-hour loop through wild horse habitat and dolphin territory across 50+ square miles of open bay water.",
+              },
+            ].map((item, i) => (
+              <ScrollReveal key={item.code} delay={i * 100}>
                 <div className="bg-surface/40 border border-border rounded-xl p-6 hover:border-accent/40 hover:bg-surface transition-all h-full">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-0.5">
-                      {Array.from({ length: r.rating }).map((_, s) => (
-                        <svg key={s} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-mute">
-                      {r.source}
-                    </span>
-                  </div>
-                  <p className="text-ink-dim leading-relaxed text-sm mb-6">
-                    &ldquo;{r.text}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-border">
-                    <div className="w-9 h-9 rounded-md bg-accent/10 border border-accent/40 text-accent-hi flex items-center justify-center text-sm font-bold">
-                      {r.name[0]}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-ink text-sm">{r.name}</p>
-                      <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-mute">
-                        Verified Guest
-                      </p>
-                    </div>
-                  </div>
+                  <p className="mono-num text-3xl font-bold text-accent-hi mb-4">{item.code}</p>
+                  <h3 className="text-ink font-bold text-lg mb-2 tracking-tight">{item.title}</h3>
+                  <p className="text-ink-dim text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
