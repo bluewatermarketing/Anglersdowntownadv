@@ -194,6 +194,12 @@ export default async function BlogPostPage({
             )}
           </div>
 
+          {post.isDraft && (
+            <div className="mb-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-warn/10 border border-warn/40 font-mono text-[10px] uppercase tracking-[0.18em] text-warn">
+              <span>●</span> Draft preview · not visible in production
+            </div>
+          )}
+
           <h1 className="text-3xl md:text-5xl font-bold text-ink leading-[1.05] tracking-tight mb-4">
             {post.title}
           </h1>

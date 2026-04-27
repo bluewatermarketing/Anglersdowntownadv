@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "draft": "tsx scripts/draft-post.ts"
+    "draft": "tsx scripts/draft-post.ts",
+    "draft:queue": "tsx scripts/draft-from-queue.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",

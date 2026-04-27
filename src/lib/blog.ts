@@ -31,6 +31,7 @@ export interface BlogPostFrontmatter {
 export interface BlogPost extends BlogPostFrontmatter {
   slug: string;
   body: string;            // MDX source — render with <MDXRemote source={body} />
+  isDraft: boolean;        // true if frontmatter set draft: true (only visible in non-production)
 }
 
 function readFileSafe(filepath: string): string | null {
@@ -60,10 +61,14 @@ export function getPost(slug: string): BlogPost | null {
       console.warn(`[blog] ${slug}${ext} missing required frontmatter`);
       return null;
     }
-    // Drafts are filtered out of the live site. They stay on disk so
-    // they can be edited; remove `draft: true` from the frontmatter
-    // when ready to publish.
-    if (fm.draft === true) return null;
+    // Drafts: hidden in production, visible on Vercel preview deploys
+    // and in `next dev`. This means the auto-draft PR's preview URL
+    // renders the post (with a draft badge), so reviewers can see it
+    // before merging — but production at anglerwatersports.com only
+    // shows posts whose draft flag is removed.
+    if (fm.draft === true && process.env.VERCEL_ENV === "production") {
+      return null;
+    }
     return {
       slug,
       title: fm.title,
@@ -74,6 +79,7 @@ export function getPost(slug: string): BlogPost | null {
       author: fm.author ?? "Angler Watersports",
       tags: fm.tags ?? [],
       readingMinutes: fm.readingMinutes,
+      isDraft: fm.draft === true,
       body: content,
     };
   }

@@ -1,0 +1,51 @@
+# Blog topic queue for Angler Watersports
+#
+# How this works:
+#   - The weekly cron (.github/workflows/draft-weekly.yml) picks the first
+#     non-comment line below, drafts a post with `npm run draft`, opens a
+#     PR for review, then prepends a "# " to that line so it isn't picked
+#     again. You'll get a GitHub email when each PR opens.
+#   - Add new topics by appending to the end of this file.
+#   - Skip a topic by adding "# " in front of it manually.
+#   - Reorder freely — the cron always picks the FIRST non-# line.
+#
+# Tone of topics: factual, locally specific, useful to a real customer
+# searching Google. Each becomes a 350-550 word post in Angler's voice
+# (no hype, no AI clichés, no overlap with OCA Watersports' phrasing).
+#
+# ── WILDLIFE / NATURE ────────────────────────────────────────────────
+Where to spot wild horses on Assateague Island from the water
+When and where dolphins show up in Assateague Bay
+Bird-watching from a pontoon boat: ospreys, herons, egrets in OC
+Wild horses 101: what to know before your visit to Assateague
+Why Assateague's wild horses live on the beach (and how to behave around them)
+Crabs, oysters, and the food chain under Assateague Bay
+Sunrise on the bay vs sunset on the bay — which run is right for you
+Seasonal wildlife calendar for Assateague Bay: May through September
+# ── ROUTE / GEOGRAPHY ────────────────────────────────────────────────
+A self-guided pontoon route through the north end of Assateague Bay
+Three sandbars worth anchoring at on Assateague Bay
+The Ocean City inlet from the water — what most visitors miss
+How far is Assateague Island from downtown Ocean City by boat
+Mapping Assateague Bay: the 50+ square miles you can ride
+# ── TIPS / FIRST-TIMER ───────────────────────────────────────────────
+First time on a jet ski? Five things to know before your run
+What to wear on a jet ski tour in Ocean City, MD
+What to bring on an 8-hour pontoon rental in Ocean City
+Planning a group day on the bay (groups of 6 or more)
+Jet ski tour vs pontoon rental: how to choose for your group
+Booking smart: when summer slots fill up and how far ahead to plan
+Bringing kids on the water: age limits and what actually works
+# ── WEATHER / SAFETY ─────────────────────────────────────────────────
+Reading the bay weather: wind, chop, and when to reschedule
+Why we run jet ski tours in light rain (and when we don't)
+Sun safety on the water: a checklist for an Ocean City summer
+What our cancellation and weather policies actually mean
+# ── EQUIPMENT / FLEET ────────────────────────────────────────────────
+Why a brand-new fleet matters (and how often we inspect)
+What's on every Angler pontoon: canopy, Bluetooth, life vests
+Self-captained pontoons: how the orientation actually works
+# ── LOCATION / DOWNTOWN OC ───────────────────────────────────────────
+Why downtown Ocean City beats the beach for fast water access
+Free parking at 312 Talbot Street: where to enter and what to expect
+Where to eat near our dock after a day on the bay
