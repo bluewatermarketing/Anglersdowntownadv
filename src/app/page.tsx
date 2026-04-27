@@ -701,50 +701,6 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          PROMO BANNER
-      ═══════════════════════════════════════════════════════ */}
-      <section className="py-16 bg-bg-deep border-y border-border relative overflow-hidden">
-        <GradientMesh variant="panel" />
-        <div className="relative max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
-          <ScrollReveal direction="left" className="flex-1">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/40 font-mono text-[10px] uppercase tracking-[0.16em] text-accent-hi mb-5">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
-              </span>
-              Limited Offer · 2026 Season
-            </span>
-            <h2 className="text-3xl md:text-5xl font-bold text-ink mb-4 tracking-tight leading-tight">
-              Buy 3 Jet Ski Runs,<br />
-              <span className="text-accent-hi">Get the 4th Free.</span>
-            </h2>
-            <p className="text-ink-dim text-lg mb-6 max-w-lg">
-              Available on sunrise and sunset slots. Bring the crew, save on the ride.
-            </p>
-            <Link
-              href="/promotions"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-bg font-bold rounded-md hover:bg-accent-hi transition-colors"
-            >
-              See All Deals
-              <span className="mono-num">→</span>
-            </Link>
-          </ScrollReveal>
-          <ScrollReveal direction="right" className="w-full md:w-96 flex-shrink-0">
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-border">
-              <Image
-                src={IMAGES.promo}
-                alt="Buy 3 jet ski rides get 4th free promotion Ocean City MD"
-                fill
-                sizes="400px"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/50 to-transparent" />
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════
           WHAT YOU CAN EXPECT
       ═══════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-28">

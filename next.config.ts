@@ -1,6 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  /* Permanent redirects for retired routes. /promotions was retired
+     and replaced with /gift-cards (the only piece worth keeping). */
+  async redirects() {
+    return [
+      {
+        source: "/promotions",
+        destination: "/gift-cards",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     // Allow local SVG assets (e.g. /angler-logo.svg). Safe because we only
     // render static files under /public that we control.

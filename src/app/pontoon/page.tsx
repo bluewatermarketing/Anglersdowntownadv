@@ -761,8 +761,8 @@ export default function PontoonPage() {
             </Link>{" "}
             run daily.
             See{" "}
-            <Link href="/promotions" className="text-accent-hi font-semibold hover:underline">
-              current deals
+            <Link href="/gift-cards" className="text-accent-hi font-semibold hover:underline">
+              gift cards
             </Link>
             ,{" "}
             <Link href="/gallery" className="text-accent-hi font-semibold hover:underline">

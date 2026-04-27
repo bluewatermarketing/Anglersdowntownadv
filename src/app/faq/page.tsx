@@ -195,7 +195,7 @@ export default function FaqPage() {
             {[
               { label: "Jet Ski", href: "/jet-ski", desc: "From $129/hr" },
               { label: "Pontoon", href: "/pontoon", desc: "From $329" },
-              { label: "Promotions", href: "/promotions", desc: "Save big" },
+              { label: "Gift Cards", href: "/gift-cards", desc: "Give the run" },
               { label: "Contact", href: "/contact", desc: "Get in touch" },
             ].map((link) => (
               <Link
