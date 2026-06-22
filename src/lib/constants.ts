@@ -74,8 +74,7 @@ export const IMAGES = {
     "https://images.squarespace-cdn.com/content/v1/681e6f3f3528991fee90a1d6/939aff9f-aa09-46b4-af5c-73b3e8754afd/a+good+one.jpg",
   scenery3:
     "https://images.squarespace-cdn.com/content/v1/681e6f3f3528991fee90a1d6/a9a00225-5c46-4568-901c-656d2f86ae28/21.jpg",
-  scenery4:
-    "https://images.squarespace-cdn.com/content/v1/681e6f3f3528991fee90a1d6/a15c1405-d2eb-4a02-a440-48f17b0b6340/16.jpg",
+  scenery4: "/images/wild-horses.jpg",
   scenery5:
     "https://images.squarespace-cdn.com/content/v1/681e6f3f3528991fee90a1d6/8d670593-231c-4199-8796-6456dd92aec7/3.jpg",
   group1:
