@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { MobileStickyBar } from "@/components/MobileStickyBar";
 import { SeasonCountdown } from "@/components/SeasonCountdown";
 import { StructuredData } from "@/components/StructuredData";
+import { SeasonBanner } from "@/components/SeasonBanner";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 
 const geist = Geist({
@@ -104,6 +105,7 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body className="min-h-full flex flex-col font-[family-name:var(--font-geist)] antialiased bg-bg text-ink">
+        <SeasonBanner />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
